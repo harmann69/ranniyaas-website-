@@ -49,7 +49,7 @@
 
   <style>
     /* ==========================================================================
-       CORE THEME, STRICT DARK WOOD BROWN TYPOGRAPHY & 120HZ SMOOTHNESS
+       CORE THEME, STRICT DARK WOOD BROWN TYPOGRAPHY & 120HZ GPU SMOOTHNESS
        ========================================================================== */
     :root {
       --bg-beige: #F3EFE6;
@@ -79,6 +79,7 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
+      text-rendering: optimizeLegibility;
     }
 
     /* Hide native pointer on fine pointer devices to show custom 3D Leaf Cursor */
@@ -109,10 +110,11 @@
     /* Darker Wood-Tinted Green Upper Header & Bar Templates */
     .wood-green-header {
       background: linear-gradient(135deg, rgba(199, 210, 196, 0.92) 0%, rgba(184, 196, 182, 0.94) 50%, rgba(213, 203, 184, 0.92) 100%);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
       border-bottom: 1px solid rgba(59, 35, 20, 0.14);
       box-shadow: 0 12px 32px -10px rgba(43, 24, 16, 0.12);
+      transform: translateZ(0);
     }
 
     .wood-green-bar {
@@ -120,6 +122,7 @@
       box-shadow:
         0 18px 38px -15px rgba(43, 24, 16, 0.16),
         inset 0 1px 0 0 rgba(243, 239, 230, 0.55);
+      transform: translateZ(0);
     }
 
     .wood-green-card {
@@ -127,6 +130,7 @@
       box-shadow:
         0 20px 45px -18px rgba(43, 24, 16, 0.15),
         inset 0 1px 0 0 rgba(243, 239, 230, 0.6);
+      transform: translateZ(0);
     }
 
     /* ==========================================================================
@@ -146,11 +150,12 @@
         transform 1.25s var(--ease-out-expo),
         visibility 1.25s;
       will-change: opacity, transform;
+      backface-visibility: hidden;
     }
 
     #splash-screen.splash-exit {
       opacity: 0;
-      transform: scale(1.06);
+      transform: scale(1.06) translateZ(0);
       visibility: hidden;
       pointer-events: none;
     }
@@ -202,12 +207,13 @@
     }
 
     @keyframes gentleBreathe {
-      0%, 100% { transform: translateY(0px) scale(1); }
-      50% { transform: translateY(-4px) scale(1.015); }
+      0%, 100% { transform: translate3d(0, 0px, 0) scale(1); }
+      50% { transform: translate3d(0, -4px, 0) scale(1.015); }
     }
 
     .splash-breathe {
       animation: gentleBreathe 5.5s ease-in-out infinite;
+      will-change: transform;
     }
 
     /* ==========================================================================
@@ -260,21 +266,22 @@
     }
 
     /* ==========================================================================
-       GLOBAL FOCUS-BLUR SYSTEM (BLURS ALL OTHER BARS/IMAGES WHEN ONE IS POINTED)
+       GLOBAL FOCUS-BLUR SYSTEM (HARDWARE-ACCELERATED FOR 120HZ SMOOTHNESS)
        ========================================================================== */
     .focus-item {
       transition:
-        filter 0.55s var(--ease-out-expo),
-        opacity 0.55s var(--ease-out-expo),
-        transform 0.65s var(--ease-spring),
-        box-shadow 0.65s var(--ease-out-expo);
-      will-change: transform, filter, opacity;
+        filter 0.45s var(--ease-out-expo),
+        opacity 0.45s var(--ease-out-expo),
+        transform 0.55s var(--ease-spring),
+        box-shadow 0.55s var(--ease-out-expo);
+      backface-visibility: hidden;
+      transform: translateZ(0);
     }
 
     body.focus-mode-active .focus-item:not(.is-focused) {
-      filter: blur(5.5px);
+      filter: blur(4px);
       opacity: 0.52;
-      transform: scale(0.985);
+      transform: scale(0.985) translateZ(0);
     }
 
     body.focus-mode-active .focus-item.is-focused {
@@ -302,9 +309,11 @@
         0 26px 55px -18px rgba(43, 24, 16, 0.25),
         0 10px 22px -10px rgba(43, 24, 16, 0.14);
       transition:
-        transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1),
-        box-shadow 0.65s var(--ease-out-expo);
-      will-change: transform, box-shadow;
+        transform 0.65s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.55s var(--ease-out-expo);
+      will-change: transform;
+      backface-visibility: hidden;
+      transform: translateZ(0);
       background-color: #D8CBB8;
     }
 
@@ -322,15 +331,17 @@
       object-fit: cover;
       display: block;
       /* Color sync filter to harmonize with wood/beige/sage/tranquil-blue theme */
-      filter: sepia(0.11) saturate(0.88) contrast(0.97) brightness(0.99);
-      transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1), filter 0.65s ease;
+      filter: sepia(0.08) saturate(0.94) contrast(0.99) brightness(0.99);
+      transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), filter 0.55s ease;
       will-change: transform;
+      backface-visibility: hidden;
+      transform: scale(1.001) translateZ(0);
     }
 
     .photo-sanctuary-wrap:hover .frameless-photo-img,
     .photo-sanctuary-wrap.is-focused .frameless-photo-img {
-      transform: scale(1.055);
-      filter: sepia(0.06) saturate(0.95) contrast(1.01) brightness(1.01);
+      transform: scale(1.055) translateZ(0);
+      filter: sepia(0.03) saturate(1.02) contrast(1.01) brightness(1.01);
     }
 
     /* 3D Realistic Branches & Leaves behind every picture & bar */
@@ -345,8 +356,8 @@
     .behind-branch-stem {
       stroke-dasharray: 280;
       stroke-dashoffset: 280;
-      transition: stroke-dashoffset 0.85s cubic-bezier(0.22, 1, 0.36, 1);
-      filter: drop-shadow(0 6px 8px rgba(43, 24, 16, 0.22));
+      transition: stroke-dashoffset 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+      filter: drop-shadow(0 5px 7px rgba(43, 24, 16, 0.2));
     }
 
     .behind-branch-leaf {
@@ -355,15 +366,15 @@
       transform: scale(0) rotate(-25deg);
       opacity: 0;
       transition:
-        transform 0.78s cubic-bezier(0.34, 1.56, 0.64, 1),
-        opacity 0.55s ease;
-      filter: drop-shadow(0 5px 7px rgba(43, 24, 16, 0.2));
+        transform 0.72s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 0.5s ease;
+      filter: drop-shadow(0 4px 6px rgba(43, 24, 16, 0.18));
     }
 
-    .behind-leaf-d1 { transition-delay: 0.08s; }
-    .behind-leaf-d2 { transition-delay: 0.16s; }
-    .behind-leaf-d3 { transition-delay: 0.24s; }
-    .behind-leaf-d4 { transition-delay: 0.32s; }
+    .behind-leaf-d1 { transition-delay: 0.06s; }
+    .behind-leaf-d2 { transition-delay: 0.12s; }
+    .behind-leaf-d3 { transition-delay: 0.18s; }
+    .behind-leaf-d4 { transition-delay: 0.24s; }
 
     /* Trigger realistic branch & leaf growth when pointer is on the picture/bar */
     .photo-sanctuary-wrap:hover .behind-branch-stem,
@@ -385,15 +396,17 @@
     .therapy-bar-item {
       position: relative;
       transition:
-        transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
-        filter 0.55s var(--ease-out-expo),
-        opacity 0.55s var(--ease-out-expo),
-        box-shadow 0.65s var(--ease-out-expo);
+        transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
+        filter 0.45s var(--ease-out-expo),
+        opacity 0.45s var(--ease-out-expo),
+        box-shadow 0.55s var(--ease-out-expo);
+      backface-visibility: hidden;
+      transform: translateZ(0);
     }
 
     .therapy-bar-item:hover,
     .therapy-bar-item.is-focused {
-      transform: translateY(-6px) scale(1.012);
+      transform: translate3d(0, -6px, 0) scale(1.012);
       box-shadow:
         0 28px 55px -16px rgba(43, 24, 16, 0.26),
         inset 0 1px 0 0 rgba(243, 239, 230, 0.75);
@@ -411,12 +424,13 @@
       pointer-events: none;
       z-index: 35;
       overflow: visible;
+      transform: translateZ(0);
     }
 
     .bottom-grow-leaf {
       transform-box: fill-box;
       transform-origin: bottom center;
-      transition: transform 0.2s linear;
+      will-change: transform;
     }
 
     /* ==========================================================================
@@ -451,6 +465,7 @@
       will-change: transform;
       display: none;
       filter: drop-shadow(0 6px 10px rgba(43, 24, 16, 0.28));
+      backface-visibility: hidden;
     }
 
     @media (hover: hover) and (pointer: fine) {
@@ -462,17 +477,23 @@
     /* Breathing mindfulness orb animation */
     @keyframes calmPulseOrb {
       0%, 100% {
-        transform: scale(0.88);
+        transform: scale(0.88) translateZ(0);
         box-shadow: 0 0 0 0 rgba(74, 46, 27, 0.15);
       }
       50% {
-        transform: scale(1.14);
+        transform: scale(1.14) translateZ(0);
         box-shadow: 0 0 0 28px rgba(74, 46, 27, 0);
       }
     }
 
     .mindful-orb {
       animation: calmPulseOrb 8s ease-in-out infinite;
+      will-change: transform;
+    }
+
+    [data-parallax-up] {
+      will-change: transform;
+      backface-visibility: hidden;
     }
 
     /* Custom Scrollbar in Wood & Sage Tones */
@@ -808,7 +829,7 @@
   <main id="top-sanctuary" class="relative z-10 pt-28 sm:pt-36 pb-36">
 
     <!-- ========================================================================
-         SECTION 1: HERO SANCTUARY SECTION
+         SECTION 1: HERO SANCTUARY SECTION (SPACIOUS MULTI-ACRE BIOPHILIC BUILDING)
          ======================================================================== -->
     <section class="relative max-w-7xl mx-auto px-4 sm:px-8 pt-6 pb-24 md:py-20">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
@@ -866,7 +887,7 @@
           </div>
         </div>
 
-        <!-- Right Frameless Hero Photography with 3D Sprouting Wood Branches & Leaves Behind -->
+        <!-- Right Frameless Hero Photography: Spacious Multi-Acre Biophilic Sanctuary Building -->
         <div class="lg:col-span-6 flex justify-center">
           <div class="focus-item photo-sanctuary-wrap w-full max-w-lg" data-tilt-card>
 
@@ -923,22 +944,24 @@
               </g>
             </svg>
 
-            <!-- Frameless Realistic Photography Shell -->
+            <!-- Frameless Realistic Photography Shell: Uses Uploaded Spacious Building Image + Seamless Architectural Estate Fallback -->
             <div class="frameless-photo-shell aspect-[4/5] w-full">
-              <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=85"
-                   onerror="this.onerror=null;this.src='https://placehold.co/800x1000/D8CBB8/2B1810?text=Ranniyas+Sanctuary';"
-                   alt="Calm peaceful human posture in morning sunlight without showing full face"
+              <img src="Gemini_Generated_Image_ufrco0ufrco0ufrc.png"
+                   fetchpriority="high"
+                   decoding="async"
+                   onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1400&q=85';"
+                   alt="Ranniya's spacious multi-acre biophilic sanctuary building surrounded by lush green lawns, terraced rooftop gardens, warm timber, glass pavilions, and reflecting pools"
                    class="frameless-photo-img" />
             </div>
 
             <!-- Upward Parallax Floating Botanical Caption Pill -->
             <div class="mt-5 flex items-center justify-between px-5 py-3.5 rounded-2xl wood-green-bar" data-parallax-up="0.09">
               <div>
-                <p class="font-serif text-lg font-semibold text-wood-deepest">Morning Light &amp; Somatic Grounding</p>
+                <p class="font-serif text-lg font-semibold text-wood-deepest">The Multi-Acre Biophilic Sanctuary Estate</p>
                 <p class="text-xs text-wood-dark">Point on any sanctuary photograph to awaken its living branches</p>
               </div>
               <span class="text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full bg-sanctuary-beige/75 text-wood-deepest">
-                Calm 01
+                Estate 01
               </span>
             </div>
           </div>
@@ -963,28 +986,27 @@
 
     <!-- ========================================================================
          SECTION 2: STRESS-FREE HUMAN THERAPY GALLERY (6 FRAMELESS PHOTOGRAPHY BLOCKS)
-         - Minimal solid/blended backgrounds
-         - Human faces are understated/not directly shown (hands, tea, silhouettes, nature)
-         - 120Hz smooth 3D bounce + behind-image realistic branches & leaves on hover
-         - Global focus-blur on all other cards when pointing on one
+         - Replaced with realistic color-matched interior & session photos from the
+           same warm timber, travertine stone, and sunlit glass sanctuary building:
+           Therapy, Mind Cure, Stress Relief, and Restorative Yoga sessions.
          ======================================================================== -->
     <section id="therapy-gallery" class="max-w-7xl mx-auto px-4 sm:px-8 py-24">
       <div class="max-w-3xl mb-16" data-parallax-up="0.08">
         <span class="inline-block px-4 py-1.5 rounded-full wood-green-bar text-xs font-semibold uppercase tracking-[0.24em] text-wood-deepest">
-          Frameless Sensory Moments
+          Frameless Sanctuary Interiors &amp; Sessions
         </span>
         <h3 class="mt-4 font-serif text-4xl sm:text-5xl md:text-6xl font-semibold text-wood-deepest">
           Spaces Crafted for Unhurried Human Care
         </h3>
         <p class="mt-4 text-base sm:text-lg text-wood-medium leading-relaxed">
-          Move your leaf pointer over any photograph below. Notice how every surrounding element gently softens into a quiet blur while realistic wood branches and botanical leaves sprout from behind your chosen moment.
+          Move your leaf pointer over any photograph from inside our sanctuary suites and glass pavilions below. Notice how every surrounding element gently softens into a quiet blur while realistic wood branches and botanical leaves sprout from behind your chosen moment.
         </p>
       </div>
 
       <!-- 6 Minimal Frameless Staggered Photography Blocks -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-14 items-start">
 
-        <!-- GALLERY ITEM 1: Warm Ceramic Tea in Gentle Hands -->
+        <!-- GALLERY ITEM 1: Sunlit Timber & Glass Private Therapy Suite (Inside the Sanctuary Building) -->
         <article class="focus-item photo-sanctuary-wrap" data-tilt-card data-parallax-up="0.05">
           <svg class="behind-branch-layer" viewBox="0 0 500 580" fill="none">
             <path class="behind-branch-stem" d="M 120,105 C 78,64 42,35 12,14" stroke="url(#woodBark3D)" stroke-width="5" stroke-linecap="round" />
@@ -998,21 +1020,23 @@
           </svg>
 
           <div class="frameless-photo-shell aspect-[4/5]">
-            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=900&q=85"
-                 onerror="this.onerror=null;this.src='https://placehold.co/700x875/D8CBB8/2B1810?text=Warm+Herbal+Ritual';"
-                 alt="Gentle hands cradling a warm minimalist ceramic cup of calming tea"
+            <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1000&q=85"
+                 loading="lazy"
+                 decoding="async"
+                 onerror="this.onerror=null;this.src='https://placehold.co/700x875/D8CBB8/2B1810?text=Timber+Therapy+Suite';"
+                 alt="Spacious warm travertine and timber therapy lounge interior with floor-to-ceiling glass overlooking sanctuary gardens"
                  class="frameless-photo-img" />
           </div>
           <div class="mt-5 px-2">
-            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-wood-dark">01 / Sensory Arrival</span>
-            <h4 class="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Warm Herbal Grounding</h4>
+            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-wood-dark">01 / Sanctuary Interior Suite</span>
+            <h4 class="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Sunlit Timber Counseling Lounge</h4>
             <p class="mt-1.5 text-sm text-wood-medium leading-relaxed">
-              Every session begins with warm botanical infusions held in handcrafted stoneware to settle the hands and breath.
+              Inside our curved glass-and-travertine wing, private therapy rooms open directly onto quiet gardens to dissolve clinical tension.
             </p>
           </div>
         </article>
 
-        <!-- GALLERY ITEM 2: Quiet Human Presence & Linen Stillness (Offset Downward) -->
+        <!-- GALLERY ITEM 2: Mind Cure & Guided Meditation Session in the Sanctuary Pavilion (Offset Downward) -->
         <article class="focus-item photo-sanctuary-wrap md:mt-12" data-tilt-card data-parallax-up="0.11">
           <svg class="behind-branch-layer" viewBox="0 0 500 580" fill="none">
             <path class="behind-branch-stem" d="M 375,98 C 425,58 460,32 490,10" stroke="url(#woodBark3D)" stroke-width="5.2" stroke-linecap="round" />
@@ -1026,21 +1050,23 @@
           </svg>
 
           <div class="frameless-photo-shell aspect-[4/5]">
-            <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=85"
-                 onerror="this.onerror=null;this.src='https://placehold.co/700x875/D8E2E5/2B1810?text=Mindful+Stillness';"
-                 alt="Peaceful silhouette sitting in tranquil nature light from behind"
+            <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1000&q=85"
+                 loading="lazy"
+                 decoding="async"
+                 onerror="this.onerror=null;this.src='https://placehold.co/700x875/D8E2E5/2B1810?text=Mind+Cure+Meditation';"
+                 alt="Calm mind cure and guided mindfulness session in a warm sunlit wooden sanctuary room"
                  class="frameless-photo-img" />
           </div>
           <div class="mt-5 px-2">
-            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-wood-dark">02 / Unburdened Mind</span>
-            <h4 class="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Quiet Horizon Reflection</h4>
+            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-wood-dark">02 / Mind Cure Session</span>
+            <h4 class="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Restorative Mind Cure &amp; Stillness</h4>
             <p class="mt-1.5 text-sm text-wood-medium leading-relaxed">
-              Without harsh lighting or clinical sterility, you are free to look inward at your own gentle pace.
+              Guided cognitive decompression and mindfulness sessions held in our warm cedar atrium bathed in soft morning light.
             </p>
           </div>
         </article>
 
-        <!-- GALLERY ITEM 3: Compassionate Human Hand Support -->
+        <!-- GALLERY ITEM 3: 1-on-1 Human Talk Therapy & Emotional Unburdening in the Building Interior -->
         <article class="focus-item photo-sanctuary-wrap lg:mt-24" data-tilt-card data-parallax-up="0.07">
           <svg class="behind-branch-layer" viewBox="0 0 500 580" fill="none">
             <path class="behind-branch-stem" d="M 122,102 C 74,62 40,34 10,12" stroke="url(#woodBark3D)" stroke-width="5.2" stroke-linecap="round" />
@@ -1054,21 +1080,23 @@
           </svg>
 
           <div class="frameless-photo-shell aspect-[4/5]">
-            <img src="https://images.unsplash.com/photo-1516585427167-9f4af9627e6c?auto=format&fit=crop&w=900&q=85"
-                 onerror="this.onerror=null;this.src='https://placehold.co/700x875/DCE3D8/2B1810?text=Compassionate+Care';"
-                 alt="Gentle supportive hands resting together in warm natural light"
+            <img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?auto=format&fit=crop&w=1000&q=85"
+                 loading="lazy"
+                 decoding="async"
+                 onerror="this.onerror=null;this.src='https://placehold.co/700x875/DCE3D8/2B1810?text=Human+Therapy+Session';"
+                 alt="Warm empathetic one-on-one human therapy conversation inside the sunlit wooden sanctuary room"
                  class="frameless-photo-img" />
           </div>
           <div class="mt-5 px-2">
-            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-wood-dark">03 / Relational Safety</span>
-            <h4 class="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Empathetic Human Connection</h4>
+            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-wood-dark">03 / Relational Talk Therapy</span>
+            <h4 class="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Unhurried Human Therapy Sessions</h4>
             <p class="mt-1.5 text-sm text-wood-medium leading-relaxed">
-              Grounded, trauma-informed therapy that honors dignity, privacy, and deep emotional attunement.
+              Compassionate one-on-one psychological support inside our acoustic-insulated timber suites overlooking the estate lawns.
             </p>
           </div>
         </article>
 
-        <!-- GALLERY ITEM 4: Zen Balance Stones & Water Calm -->
+        <!-- GALLERY ITEM 4: Restorative Yoga & Somatic Flow in the Glass Garden Pavilion -->
         <article class="focus-item photo-sanctuary-wrap" data-tilt-card data-parallax-up="0.09">
           <svg class="behind-branch-layer" viewBox="0 0 500 580" fill="none">
             <path class="behind-branch-stem" d="M 118,468 C 70,506 36,536 8,566" stroke="url(#woodBark3D)" stroke-width="5.2" stroke-linecap="round" />
@@ -1080,21 +1108,23 @@
           </svg>
 
           <div class="frameless-photo-shell aspect-[4/5]">
-            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=85"
-                 onerror="this.onerror=null;this.src='https://placehold.co/700x875/C7D2C4/2B1810?text=Somatic+Equilibrium';"
-                 alt="Minimalist balanced zen stones in calm tranquil water"
+            <img src="https://images.unsplash.com/photo-1599901860904-17e6ed7083a0?auto=format&fit=crop&w=1000&q=85"
+                 loading="lazy"
+                 decoding="async"
+                 onerror="this.onerror=null;this.src='https://placehold.co/700x875/C7D2C4/2B1810?text=Sanctuary+Yoga+Studio';"
+                 alt="Restorative yoga and somatic movement session inside the warm wooden floor-to-ceiling glass studio"
                  class="frameless-photo-img" />
           </div>
           <div class="mt-5 px-2">
-            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-wood-dark">04 / Nervous System Reset</span>
-            <h4 class="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Restorative Equilibrium</h4>
+            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-wood-dark">04 / Therapeutic Yoga Studio</span>
+            <h4 class="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Somatic Yoga &amp; Breath Alignment</h4>
             <p class="mt-1.5 text-sm text-wood-medium leading-relaxed">
-              Releasing chronic tension through gentle somatic pacing, acoustic quietude, and natural textures.
+              Gentle, trauma-informed yoga and somatic grounding practiced on warm timber floors beside our biophilic terrace greenery.
             </p>
           </div>
         </article>
 
-        <!-- GALLERY ITEM 5: Mindful Journaling & Wood Desk Sanctuary -->
+        <!-- GALLERY ITEM 5: Deep Stress Relief & Sensory Sanctuary Lounge -->
         <article class="focus-item photo-sanctuary-wrap md:mt-12" data-tilt-card data-parallax-up="0.13">
           <svg class="behind-branch-layer" viewBox="0 0 500 580" fill="none">
             <path class="behind-branch-stem" d="M 118,104 C 72,62 38,34 10,12" stroke="url(#woodBark3D)" stroke-width="5.2" stroke-linecap="round" />
@@ -1106,21 +1136,23 @@
           </svg>
 
           <div class="frameless-photo-shell aspect-[4/5]">
-            <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=85"
-                 onerror="this.onerror=null;this.src='https://placehold.co/700x875/D8CBB8/2B1810?text=Reflective+Writing';"
-                 alt="Minimalist open journal on warm natural wood table with soft shadows"
+            <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1000&q=85"
+                 loading="lazy"
+                 decoding="async"
+                 onerror="this.onerror=null;this.src='https://placehold.co/700x875/D8CBB8/2B1810?text=Stress+Relief+Sanctuary';"
+                 alt="Tranquil warm wood and travertine stone stress relief sanctuary interior with soft natural light"
                  class="frameless-photo-img" />
           </div>
           <div class="mt-5 px-2">
-            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-wood-dark">05 / Narrative Clarity</span>
-            <h4 class="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Reflective Integration</h4>
+            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-wood-dark">05 / Autonomic Stress Relief</span>
+            <h4 class="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Sensory Decompression Chamber</h4>
             <p class="mt-1.5 text-sm text-wood-medium leading-relaxed">
-              Untangling complex life transitions on warm timber surfaces with guided expressive reflection.
+              Designed with travertine stone, warm cedar, and reflecting water views to melt away chronic stress and nervous system fatigue.
             </p>
           </div>
         </article>
 
-        <!-- GALLERY ITEM 6: Botanical Mist & Forest Walk Therapy -->
+        <!-- GALLERY ITEM 6: Courtyard Terrace Yoga & Eco-Therapy Overlooking the Acres -->
         <article class="focus-item photo-sanctuary-wrap lg:mt-24" data-tilt-card data-parallax-up="0.08">
           <svg class="behind-branch-layer" viewBox="0 0 500 580" fill="none">
             <path class="behind-branch-stem" d="M 380,102 C 426,62 460,34 490,12" stroke="url(#woodBark3D)" stroke-width="5.2" stroke-linecap="round" />
@@ -1132,16 +1164,18 @@
           </svg>
 
           <div class="frameless-photo-shell aspect-[4/5]">
-            <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=900&q=85"
-                 onerror="this.onerror=null;this.src='https://placehold.co/700x875/B8C4B6/2B1810?text=Botanical+Solitude';"
-                 alt="Sunlit tranquil forest trees and soft morning mist"
+            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1000&q=85"
+                 loading="lazy"
+                 decoding="async"
+                 onerror="this.onerror=null;this.src='https://placehold.co/700x875/B8C4B6/2B1810?text=Terrace+Yoga+Session';"
+                 alt="Mindful group yoga and stress-relief breathing session inside the sunlit botanical conservatory"
                  class="frameless-photo-img" />
           </div>
           <div class="mt-5 px-2">
-            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-wood-dark">06 / Eco-Psychology</span>
-            <h4 class="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Botanical Canopy Calm</h4>
+            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-wood-dark">06 / Biophilic Terrace Sessions</span>
+            <h4 class="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Conservatory Yoga &amp; Mindful Renewal</h4>
             <p class="mt-1.5 text-sm text-wood-medium leading-relaxed">
-              Integrating nature-assisted mindfulness and biophilic architecture to restore cognitive ease.
+              Held on our curved botanical balconies overlooking acres of quiet greenery, blending movement, breathwork, and nature therapy.
             </p>
           </div>
         </article>
@@ -1280,10 +1314,10 @@
               </span>
               <div>
                 <h4 class="font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">
-                  Botanical Silence &amp; Mindful Sensory Care
+                  Botanical Silence, Yoga &amp; Mindful Sensory Care
                 </h4>
                 <p class="mt-1 text-sm sm:text-base text-wood-dark max-w-2xl">
-                  Low-stimulation restorative sessions combining cedarwood aromatherapy, acoustic stillness, and guided mindfulness in our courtyard atrium.
+                  Low-stimulation restorative sessions combining cedarwood aromatherapy, gentle yoga postures, acoustic stillness, and guided mindfulness in our courtyard atrium.
                 </p>
               </div>
             </div>
@@ -1340,13 +1374,13 @@
         <div class="lg:col-span-6 space-y-8" data-parallax-up="0.14">
           <div class="focus-item wood-green-bar rounded-3xl p-8 sm:p-10">
             <span class="text-xs font-semibold uppercase tracking-[0.22em] text-wood-dark">
-              Why Minimalism Heals
+              Why Biophilic Architecture Heals
             </span>
             <h4 class="mt-2 font-serif text-3xl sm:text-4xl font-semibold text-wood-deepest">
               Designed Without Visual Noise or Clinical Coldness
             </h4>
             <p class="mt-3 text-sm sm:text-base text-wood-medium leading-relaxed">
-              Research in environmental psychology shows that natural wood grain, muted tranquil blues, and soft botanical greens measurably lower cortisol within minutes of arrival. At Ranniya’s, every surface, shadow, and sound is curated to let your nervous system exhale.
+              Research in environmental psychology shows that natural wood grain, curved travertine stone, muted tranquil blues, and sprawling green lawns measurably lower cortisol within minutes of arrival. At Ranniya’s, every terrace, suite, and reflection pool is curated to let your nervous system exhale.
             </p>
           </div>
 
@@ -1354,13 +1388,13 @@
             <div class="focus-item wood-green-card rounded-3xl p-6">
               <h5 class="font-serif text-2xl font-semibold text-wood-deepest">Acoustic Stillness</h5>
               <p class="mt-2 text-sm text-wood-medium leading-relaxed">
-                Double-insulated cedar suites ensure complete privacy and gentle quietude throughout your therapy hour.
+                Double-insulated cedar and glass suites ensure complete privacy and gentle quietude throughout your therapy hour.
               </p>
             </div>
             <div class="focus-item wood-green-card rounded-3xl p-6">
               <h5 class="font-serif text-2xl font-semibold text-wood-deepest">Unrushed Transitions</h5>
               <p class="mt-2 text-sm text-wood-medium leading-relaxed">
-                We schedule generous 25-minute buffers between guests so you never feel hurried leaving a session.
+                We schedule generous 25-minute buffers between guests so you can stroll the sanctuary grounds without ever feeling hurried.
               </p>
             </div>
           </div>
@@ -1382,7 +1416,7 @@
             Arrange a Private Welcome at Ranniya’s
           </h3>
           <p class="mt-3 text-sm sm:text-base text-wood-dark leading-relaxed">
-            Share a few gentle details below. Our sanctuary coordinator will reach out quietly to arrange your first in-person or private online session.
+            Share a few gentle details below. Our sanctuary coordinator will reach out quietly to arrange your first in-person estate session or private online consultation.
           </p>
         </div>
 
@@ -1412,7 +1446,7 @@
               <option value="Somatics & Breath Regulation">01 — Somatics &amp; Breath Regulation</option>
               <option value="Grounded Depth Talk Therapy">02 — Grounded Depth Talk Therapy</option>
               <option value="Emotional Restoration & Burnout Care">03 — Emotional Restoration &amp; Burnout Care</option>
-              <option value="Botanical Silence & Sensory Care">04 — Botanical Silence &amp; Sensory Care</option>
+              <option value="Botanical Silence, Yoga & Sensory Care">04 — Botanical Silence, Yoga &amp; Sensory Care</option>
             </select>
           </div>
 
@@ -1548,10 +1582,10 @@
   </div>
 
   <!-- ==========================================================================
-       120HZ HIGH-PRECISION JAVASCRIPT ANIMATION ENGINE
+       120HZ HIGH-PRECISION JAVASCRIPT ANIMATION ENGINE (OPTIMIZED FOR ZERO JANK)
        ========================================================================== -->
   <script>
-    window.onload = function () {
+    window.addEventListener('DOMContentLoaded', function () {
       /* ------------------------------------------------------------------------
          1. INTRO SPLASH SCREEN CONTROLLER
          ------------------------------------------------------------------------ */
@@ -1568,7 +1602,6 @@
 
       function replaySplash() {
         splashDismissed = false;
-        // Reset SVG animations cleanly by cloning the SVG node
         const svgNode = splashScreen.querySelector('svg');
         if (svgNode) {
           const clone = svgNode.cloneNode(true);
@@ -1625,36 +1658,41 @@
       }
 
       /* ------------------------------------------------------------------------
-         3. GLOBAL FOCUS-BLUR INTERACTION & 3D TILT SPRING BOUNCE ON IMAGES
-         When pointing on an image or bar, all other bars/images smoothly blur.
+         3. GLOBAL FOCUS-BLUR INTERACTION & ZERO-REFLOW 3D TILT SPRING BOUNCE
          ------------------------------------------------------------------------ */
       const focusItems = document.querySelectorAll('.focus-item');
       const tiltCards = document.querySelectorAll('[data-tilt-card]');
+      let activeFocusedItem = null;
 
       focusItems.forEach(function (item) {
         item.addEventListener('mouseenter', function () {
-          document.body.classList.add('focus-mode-active');
-          focusItems.forEach(function (other) {
-            other.classList.remove('is-focused');
-          });
+          if (activeFocusedItem && activeFocusedItem !== item) {
+            activeFocusedItem.classList.remove('is-focused');
+          }
+          activeFocusedItem = item;
           item.classList.add('is-focused');
-        });
+          document.body.classList.add('focus-mode-active');
+        }, { passive: true });
 
         item.addEventListener('mouseleave', function () {
           item.classList.remove('is-focused');
+          if (activeFocusedItem === item) {
+            activeFocusedItem = null;
+          }
           document.body.classList.remove('focus-mode-active');
-        });
+        }, { passive: true });
 
-        // Mobile touch support: tapping an image/bar focuses it and grows its branches
         item.addEventListener('touchstart', function (e) {
           const alreadyFocused = item.classList.contains('is-focused');
-          focusItems.forEach(function (other) {
-            other.classList.remove('is-focused');
-          });
+          if (activeFocusedItem) {
+            activeFocusedItem.classList.remove('is-focused');
+          }
           if (!alreadyFocused) {
-            document.body.classList.add('focus-mode-active');
+            activeFocusedItem = item;
             item.classList.add('is-focused');
+            document.body.classList.add('focus-mode-active');
           } else {
+            activeFocusedItem = null;
             document.body.classList.remove('focus-mode-active');
           }
           e.stopPropagation();
@@ -1663,28 +1701,44 @@
 
       document.body.addEventListener('touchstart', function () {
         document.body.classList.remove('focus-mode-active');
-        focusItems.forEach(function (item) {
-          item.classList.remove('is-focused');
-        });
+        if (activeFocusedItem) {
+          activeFocusedItem.classList.remove('is-focused');
+          activeFocusedItem = null;
+        }
       }, { passive: true });
 
-      // 3D Perspective Tilt & Spring Bounce on Frameless Photos
+      // Cached bounding-box 3D tilt (eliminates layout thrashing during mousemove)
       tiltCards.forEach(function (card) {
         const shell = card.querySelector('.frameless-photo-shell');
         if (!shell) return;
 
+        let cachedRect = null;
+        let tiltRaf = null;
+
+        card.addEventListener('mouseenter', function () {
+          cachedRect = shell.getBoundingClientRect();
+        }, { passive: true });
+
         card.addEventListener('mousemove', function (e) {
-          const rect = shell.getBoundingClientRect();
-          const relX = (e.clientX - rect.left) / rect.width - 0.5;
-          const relY = (e.clientY - rect.top) / rect.height - 0.5;
-          const rotateX = (-relY * 9).toFixed(2);
-          const rotateY = (relX * 9).toFixed(2);
-          shell.style.transform = `translateY(-10px) scale(1.028) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
+          if (!cachedRect) cachedRect = shell.getBoundingClientRect();
+          const clientX = e.clientX;
+          const clientY = e.clientY;
+
+          if (tiltRaf) cancelAnimationFrame(tiltRaf);
+          tiltRaf = requestAnimationFrame(function () {
+            const relX = (clientX - cachedRect.left) / cachedRect.width - 0.5;
+            const relY = (clientY - cachedRect.top) / cachedRect.height - 0.5;
+            const rotateX = (-relY * 8.5).toFixed(2);
+            const rotateY = (relX * 8.5).toFixed(2);
+            shell.style.transform = `translate3d(0, -10px, 0) scale(1.026) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+          });
+        }, { passive: true });
 
         card.addEventListener('mouseleave', function () {
-          shell.style.transform = 'translateY(0px) scale(1) rotateX(0deg) rotateY(0deg)';
-        });
+          if (tiltRaf) cancelAnimationFrame(tiltRaf);
+          cachedRect = null;
+          shell.style.transform = 'translate3d(0, 0px, 0) scale(1) rotateX(0deg) rotateY(0deg)';
+        }, { passive: true });
       });
 
       /* ------------------------------------------------------------------------
@@ -1692,7 +1746,7 @@
          ------------------------------------------------------------------------ */
       const leafCursor = document.getElementById('leaf-cursor');
       const smokeCanvas = document.getElementById('smoke-trail-canvas');
-      const smokeCtx = smokeCanvas.getContext('2d');
+      const smokeCtx = smokeCanvas.getContext('2d', { alpha: true });
       const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
       let mouseX = window.innerWidth / 2;
@@ -1702,16 +1756,16 @@
       let cursorAngle = 0;
       let lastSmokeSpawn = 0;
       const smokeParticles = [];
-      const MAX_SMOKE_PARTICLES = 11; // Strictly minimal & subtle
+      const MAX_SMOKE_PARTICLES = 10;
 
       /* ------------------------------------------------------------------------
          5. VERY MINIMAL FALLING LEAVES CANVAS (ONLY 3 REALISTIC LEAVES)
          ------------------------------------------------------------------------ */
       const leavesCanvas = document.getElementById('falling-leaves-canvas');
-      const leavesCtx = leavesCanvas.getContext('2d');
+      const leavesCtx = leavesCanvas.getContext('2d', { alpha: true });
 
       function resizeCanvases() {
-        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const dpr = Math.min(window.devicePixelRatio || 1, 1.75);
         smokeCanvas.width = window.innerWidth * dpr;
         smokeCanvas.height = window.innerHeight * dpr;
         smokeCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -1721,7 +1775,7 @@
         leavesCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
       }
       resizeCanvases();
-      window.addEventListener('resize', resizeCanvases);
+      window.addEventListener('resize', resizeCanvases, { passive: true });
 
       if (isFinePointer) {
         window.addEventListener('mousemove', function (e) {
@@ -1732,9 +1786,8 @@
           mouseX = e.clientX;
           mouseY = e.clientY;
 
-          // Spawn a very subtle, heavily blurred smoke shadow puff only occasionally
           const now = performance.now();
-          if (speed > 2.5 && now - lastSmokeSpawn > 55 && smokeParticles.length < MAX_SMOKE_PARTICLES) {
+          if (speed > 2.5 && now - lastSmokeSpawn > 60 && smokeParticles.length < MAX_SMOKE_PARTICLES) {
             lastSmokeSpawn = now;
             smokeParticles.push({
               x: mouseX + 8,
@@ -1742,15 +1795,14 @@
               vx: (Math.random() - 0.5) * 0.35 - dx * 0.02,
               vy: -0.25 - Math.random() * 0.3,
               radius: 16 + Math.random() * 10,
-              alpha: 0.075, // Very low opacity, soft blurred shadow mist
+              alpha: 0.072,
               life: 0,
-              maxLife: 48 + Math.random() * 20
+              maxLife: 46 + Math.random() * 18
             });
           }
         }, { passive: true });
       }
 
-      // Create strictly 3 minimal realistic falling botanical leaves across the viewport
       const fallingLeaves = [
         { x: window.innerWidth * 0.14, y: 120, size: 15, angle: 0.4, spin: 0.008, swaySeed: 1.1, speedY: 0.32, hue: '#7E9978' },
         { x: window.innerWidth * 0.56, y: 420, size: 13, angle: -0.6, spin: -0.007, swaySeed: 2.7, speedY: 0.28, hue: '#6E8B67' },
@@ -1763,12 +1815,10 @@
         ctx.rotate(leaf.angle);
         const s = leaf.size;
 
-        // Soft 3D drop shadow
-        ctx.shadowColor = 'rgba(43, 24, 16, 0.16)';
-        ctx.shadowBlur = 8;
+        ctx.shadowColor = 'rgba(43, 24, 16, 0.15)';
+        ctx.shadowBlur = 7;
         ctx.shadowOffsetY = 4;
 
-        // Leaf blade
         ctx.beginPath();
         ctx.moveTo(0, s);
         ctx.bezierCurveTo(-s * 0.65, s * 0.3, -s * 0.7, -s * 0.5, 0, -s);
@@ -1777,7 +1827,6 @@
         ctx.fillStyle = leaf.hue;
         ctx.fill();
 
-        // Central wood stem vein
         ctx.shadowColor = 'transparent';
         ctx.beginPath();
         ctx.moveTo(0, s + 3);
@@ -1792,7 +1841,13 @@
       /* ------------------------------------------------------------------------
          6. SCROLL-DRIVEN BOTTOM GROWING BRANCHES & UPWARD PARALLAX ELEMENTS
          ------------------------------------------------------------------------ */
-      const parallaxUpNodes = document.querySelectorAll('[data-parallax-up]');
+      const parallaxUpNodes = Array.from(document.querySelectorAll('[data-parallax-up]')).map(function (node) {
+        return {
+          el: node,
+          speed: parseFloat(node.getAttribute('data-parallax-up')) || 0.08
+        };
+      });
+
       const bottomBranchPaths = [
         document.getElementById('scroll-branch-left-main'),
         document.getElementById('scroll-branch-left-sub1'),
@@ -1815,7 +1870,6 @@
         { el: document.getElementById('scroll-leaf-r5'), x: 1082, y: 126, rot: -75, threshold: 0.55 }
       ];
 
-      // Initialize dasharray lengths for bottom branches
       const branchLengths = bottomBranchPaths.map(function (path) {
         if (!path) return 0;
         const len = path.getTotalLength ? path.getTotalLength() : 420;
@@ -1827,9 +1881,14 @@
       let currentScrollY = window.scrollY;
       let smoothScrollY = currentScrollY;
       let scrollDelta = 0;
+      let maxScrollCached = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
 
       window.addEventListener('scroll', function () {
         currentScrollY = window.scrollY;
+      }, { passive: true });
+
+      window.addEventListener('resize', function () {
+        maxScrollCached = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
       }, { passive: true });
 
       /* ------------------------------------------------------------------------
@@ -1862,64 +1921,65 @@
       }
 
       /* ------------------------------------------------------------------------
-         9. UNIFIED 120HZ REQUESTANIMATIONFRAME LOOP
+         9. UNIFIED 120HZ REQUESTANIMATIONFRAME LOOP (OPTIMIZED)
          ------------------------------------------------------------------------ */
       let timeTick = 0;
+      let initialRenderDone = false;
 
       function animateSanctuaryLoop() {
         timeTick += 0.016;
 
-        // Smooth scroll interpolation for 120Hz fluidity
         const prevSmoothScroll = smoothScrollY;
         smoothScrollY += (currentScrollY - smoothScrollY) * 0.14;
         scrollDelta = smoothScrollY - prevSmoothScroll;
+        const isScrolling = Math.abs(currentScrollY - smoothScrollY) > 0.04 || !initialRenderDone;
 
         // A. Update Custom 3D Leaf Pointer & Minimal Blurred Smoke Trail
         if (isFinePointer) {
           const vx = mouseX - cursorX;
           const vy = mouseY - cursorY;
-          cursorX += vx * 0.28;
-          cursorY += vy * 0.28;
+          cursorX += vx * 0.3;
+          cursorY += vy * 0.3;
 
           const targetAngle = Math.max(-28, Math.min(28, vx * 0.85));
           cursorAngle += (targetAngle - cursorAngle) * 0.18;
 
           leafCursor.style.transform = `translate3d(${cursorX.toFixed(1)}px, ${cursorY.toFixed(1)}px, 0) rotate(${cursorAngle.toFixed(1)}deg)`;
 
-          // Render Very Minimal Blurred Smoke Shadow Particles
-          smokeCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
-          for (let i = smokeParticles.length - 1; i >= 0; i--) {
-            const p = smokeParticles[i];
-            p.life++;
-            p.x += p.vx;
-            p.y += p.vy;
-            p.radius += 0.38;
+          if (smokeParticles.length > 0) {
+            smokeCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+            for (let i = smokeParticles.length - 1; i >= 0; i--) {
+              const p = smokeParticles[i];
+              p.life++;
+              p.x += p.vx;
+              p.y += p.vy;
+              p.radius += 0.38;
 
-            const progress = p.life / p.maxLife;
-            const currentAlpha = p.alpha * (1 - progress);
+              const progress = p.life / p.maxLife;
+              const currentAlpha = p.alpha * (1 - progress);
 
-            if (p.life >= p.maxLife || currentAlpha <= 0.002) {
-              smokeParticles.splice(i, 1);
-              continue;
+              if (p.life >= p.maxLife || currentAlpha <= 0.002) {
+                smokeParticles.splice(i, 1);
+                continue;
+              }
+
+              const grad = smokeCtx.createRadialGradient(p.x, p.y, 1, p.x, p.y, p.radius);
+              grad.addColorStop(0, `rgba(74, 46, 27, ${currentAlpha.toFixed(3)})`);
+              grad.addColorStop(0.55, `rgba(110, 139, 103, ${(currentAlpha * 0.5).toFixed(3)})`);
+              grad.addColorStop(1, 'rgba(74, 46, 27, 0)');
+
+              smokeCtx.fillStyle = grad;
+              smokeCtx.beginPath();
+              smokeCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+              smokeCtx.fill();
             }
-
-            const grad = smokeCtx.createRadialGradient(p.x, p.y, 1, p.x, p.y, p.radius);
-            grad.addColorStop(0, `rgba(74, 46, 27, ${currentAlpha.toFixed(3)})`);
-            grad.addColorStop(0.55, `rgba(110, 139, 103, ${(currentAlpha * 0.5).toFixed(3)})`);
-            grad.addColorStop(1, 'rgba(74, 46, 27, 0)');
-
-            smokeCtx.fillStyle = grad;
-            smokeCtx.beginPath();
-            smokeCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-            smokeCtx.fill();
           }
         }
 
-        // B. Render Very Minimal Falling Leaves (Drifting Downward + Scroll Momentum)
+        // B. Render Very Minimal Falling Leaves
         leavesCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
         for (let i = 0; i < fallingLeaves.length; i++) {
           const leaf = fallingLeaves[i];
-          // Moves gently down continuously and accelerates slightly when scrolling down
           leaf.y += leaf.speedY + Math.max(0, scrollDelta * 0.18);
           leaf.x += Math.sin(timeTick * 1.1 + leaf.swaySeed) * 0.35;
           leaf.angle += leaf.spin + Math.cos(timeTick + leaf.swaySeed) * 0.003;
@@ -1931,33 +1991,33 @@
           drawRealisticCanvasLeaf(leavesCtx, leaf);
         }
 
-        // C. Upward Moving Elements While Scrolling Down
-        const viewportCenter = smoothScrollY + window.innerHeight * 0.5;
-        for (let i = 0; i < parallaxUpNodes.length; i++) {
-          const node = parallaxUpNodes[i];
-          const speed = parseFloat(node.getAttribute('data-parallax-up')) || 0.08;
-          const offsetUp = -smoothScrollY * speed;
-          node.style.transform = `translate3d(0, ${offsetUp.toFixed(1)}px, 0)`;
+        // C. Upward Moving Elements & Bottom Branch Drawing (Only write DOM styles when scroll changes)
+        const scrollRatio = Math.min(1, Math.max(0.04, smoothScrollY / maxScrollCached));
+
+        if (isScrolling) {
+          for (let i = 0; i < parallaxUpNodes.length; i++) {
+            const item = parallaxUpNodes[i];
+            const offsetUp = -smoothScrollY * item.speed;
+            item.el.style.transform = `translate3d(0, ${offsetUp.toFixed(1)}px, 0)`;
+          }
+
+          for (let i = 0; i < bottomBranchPaths.length; i++) {
+            const path = bottomBranchPaths[i];
+            if (!path) continue;
+            const totalLen = branchLengths[i];
+            const delayFactor = (i % 3 === 0) ? 1 : 0.85;
+            const drawFraction = Math.min(1, scrollRatio * 1.35 * delayFactor);
+            path.style.strokeDashoffset = (totalLen * (1 - drawFraction)).toFixed(1);
+          }
+          initialRenderDone = true;
         }
 
-        // D. Bottom Growing Realistic 3D Wood Branches as User Scrolls Down
-        const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
-        const scrollRatio = Math.min(1, Math.max(0.04, smoothScrollY / maxScroll));
-
-        for (let i = 0; i < bottomBranchPaths.length; i++) {
-          const path = bottomBranchPaths[i];
-          if (!path) continue;
-          const totalLen = branchLengths[i];
-          // Main stems grow first, sub-twigs follow smoothly
-          const delayFactor = (i % 3 === 0) ? 1 : 0.85;
-          const drawFraction = Math.min(1, scrollRatio * 1.35 * delayFactor);
-          path.style.strokeDashoffset = (totalLen * (1 - drawFraction)).toFixed(1);
-        }
-
+        // D. Bottom Leaves Gentle Breeze Sway
         for (let i = 0; i < bottomLeafNodes.length; i++) {
           const item = bottomLeafNodes[i];
           if (!item.el) continue;
           const leafProgress = Math.max(0, Math.min(1, (scrollRatio - item.threshold) / 0.35));
+          if (leafProgress <= 0.001 && !isScrolling) continue;
           const swayDeg = Math.sin(timeTick * 1.6 + i) * 4 * leafProgress;
           const scaleVal = (leafProgress * 0.92).toFixed(3);
           item.el.setAttribute(
@@ -1970,7 +2030,7 @@
       }
 
       animateSanctuaryLoop();
-    };
+    });
   </script>
 </body>
 </html>
