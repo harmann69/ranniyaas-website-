@@ -1,0 +1,1976 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ranniya's — Quiet Mind, Grounded Soul | Psychology & Human Therapy Sanctuary</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Google Fonts: Montserrat, Cormorant Garamond, Playfair Display -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            wood: {
+              deepest: '#2B1810',
+              dark: '#3B2314',
+              medium: '#4A2E1B',
+              warm: '#6B442A',
+              tint: '#D8CBB8',
+              bark: '#5C3A21'
+            },
+            sanctuary: {
+              beige: '#F3EFE6',
+              splash: '#EFECE4',
+              blue: '#D8E2E5',
+              blueDeep: '#C5D3D8',
+              sage: '#DCE3D8',
+              headerGreen: '#C7D2C4',
+              barGreen: '#B8C4B6',
+              moss: '#9CAF96'
+            }
+          },
+          fontFamily: {
+            sans: ['Montserrat', 'sans-serif'],
+            serif: ['Cormorant Garamond', 'serif'],
+            display: ['Playfair Display', 'serif']
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* ==========================================================================
+       CORE THEME, STRICT DARK WOOD BROWN TYPOGRAPHY & 120HZ SMOOTHNESS
+       ========================================================================== */
+    :root {
+      --bg-beige: #F3EFE6;
+      --bg-splash: #EFECE4;
+      --bg-tranquil-blue: #D8E2E5;
+      --bg-sage: #DCE3D8;
+      --template-green: #C7D2C4;
+      --template-green-deep: #B8C4B6;
+      --wood-deepest: #2B1810;
+      --wood-dark: #3B2314;
+      --wood-medium: #4A2E1B;
+      --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      color: var(--wood-deepest);
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-beige);
+      color: var(--wood-deepest);
+      font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Hide native pointer on fine pointer devices to show custom 3D Leaf Cursor */
+    @media (hover: hover) and (pointer: fine) {
+      body, a, button, input, select, textarea, [role="button"] {
+        cursor: none !important;
+      }
+    }
+
+    /* Subtle realistic organic wood & linen grain overlay */
+    .organic-grain {
+      background-image: radial-gradient(rgba(43, 24, 16, 0.04) 1px, transparent 0);
+      background-size: 24px 24px;
+    }
+
+    /* Smooth ambient background color transitions across sections */
+    .bg-sanctuary-flow {
+      background: linear-gradient(
+        180deg,
+        #F3EFE6 0%,
+        #DCE3D8 24%,
+        #D8E2E5 52%,
+        #DCE3D8 78%,
+        #F3EFE6 100%
+      );
+    }
+
+    /* Darker Wood-Tinted Green Upper Header & Bar Templates */
+    .wood-green-header {
+      background: linear-gradient(135deg, rgba(199, 210, 196, 0.92) 0%, rgba(184, 196, 182, 0.94) 50%, rgba(213, 203, 184, 0.92) 100%);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(59, 35, 20, 0.14);
+      box-shadow: 0 12px 32px -10px rgba(43, 24, 16, 0.12);
+    }
+
+    .wood-green-bar {
+      background: linear-gradient(135deg, #C7D2C4 0%, #B8C4B6 55%, #D2C8B8 100%);
+      box-shadow:
+        0 18px 38px -15px rgba(43, 24, 16, 0.16),
+        inset 0 1px 0 0 rgba(243, 239, 230, 0.55);
+    }
+
+    .wood-green-card {
+      background: linear-gradient(145deg, rgba(199, 210, 196, 0.85) 0%, rgba(216, 226, 229, 0.85) 55%, rgba(216, 203, 184, 0.85) 100%);
+      box-shadow:
+        0 20px 45px -18px rgba(43, 24, 16, 0.15),
+        inset 0 1px 0 0 rgba(243, 239, 230, 0.6);
+    }
+
+    /* ==========================================================================
+       SPLASH SCREEN (FIRST ANIMATION)
+       ========================================================================== */
+    #splash-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background-color: #EFECE4;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition:
+        opacity 1.15s var(--ease-out-expo),
+        transform 1.25s var(--ease-out-expo),
+        visibility 1.25s;
+      will-change: opacity, transform;
+    }
+
+    #splash-screen.splash-exit {
+      opacity: 0;
+      transform: scale(1.06);
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* Growing SVG paths on Splash Screen */
+    .splash-branch-path {
+      stroke-dasharray: 600;
+      stroke-dashoffset: 600;
+      animation: growBranchSplash 2.8s var(--ease-out-expo) 0.2s forwards;
+    }
+
+    .splash-twig-path {
+      stroke-dasharray: 220;
+      stroke-dashoffset: 220;
+      animation: growBranchSplash 2.2s var(--ease-out-expo) 0.85s forwards;
+    }
+
+    .splash-leaf-node {
+      transform-box: fill-box;
+      transform-origin: bottom center;
+      transform: scale(0) rotate(-18deg);
+      opacity: 0;
+      animation: unfurlLeafSplash 1.6s var(--ease-spring) forwards;
+    }
+
+    .splash-leaf-delay-1 { animation-delay: 0.9s; }
+    .splash-leaf-delay-2 { animation-delay: 1.15s; }
+    .splash-leaf-delay-3 { animation-delay: 1.35s; }
+    .splash-leaf-delay-4 { animation-delay: 1.55s; }
+    .splash-leaf-delay-5 { animation-delay: 1.75s; }
+
+    @keyframes growBranchSplash {
+      to { stroke-dashoffset: 0; }
+    }
+
+    @keyframes unfurlLeafSplash {
+      0% {
+        transform: scale(0) rotate(-22deg);
+        opacity: 0;
+      }
+      70% {
+        transform: scale(1.08) rotate(4deg);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    @keyframes gentleBreathe {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-4px) scale(1.015); }
+    }
+
+    .splash-breathe {
+      animation: gentleBreathe 5.5s ease-in-out infinite;
+    }
+
+    /* ==========================================================================
+       HEADER BAR "RANNIYA'S" INTERTWINED 3D BRANCH & LEAF HOVER ANIMATION
+       ========================================================================== */
+    .brand-logo-wrap {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      padding: 0.35rem 0.85rem;
+    }
+
+    .brand-logo-wrap .header-branch-path {
+      stroke-dasharray: 180;
+      stroke-dashoffset: 45;
+      transition: stroke-dashoffset 0.85s var(--ease-spring), transform 0.85s var(--ease-spring);
+    }
+
+    .brand-logo-wrap .header-leaf {
+      transform-box: fill-box;
+      transform-origin: center bottom;
+      transform: scale(0.72) rotate(-8deg);
+      transition: transform 0.75s var(--ease-spring), filter 0.75s var(--ease-spring);
+    }
+
+    .brand-logo-wrap:hover .header-branch-path,
+    .brand-logo-wrap:focus-visible .header-branch-path {
+      stroke-dashoffset: 0;
+    }
+
+    .brand-logo-wrap:hover .header-leaf-1 {
+      transform: scale(1.18) rotate(8deg) translateY(-2px);
+    }
+    .brand-logo-wrap:hover .header-leaf-2 {
+      transform: scale(1.22) rotate(-12deg) translateY(-3px);
+    }
+    .brand-logo-wrap:hover .header-leaf-3 {
+      transform: scale(1.15) rotate(14deg) translateY(-2px);
+    }
+    .brand-logo-wrap:hover .header-leaf-4 {
+      transform: scale(1.25) rotate(-6deg) translateY(-2px);
+    }
+
+    .brand-logo-text {
+      transition: transform 0.65s var(--ease-spring), letter-spacing 0.65s var(--ease-spring);
+    }
+    .brand-logo-wrap:hover .brand-logo-text {
+      transform: translateY(-1px) scale(1.03);
+      letter-spacing: 0.04em;
+    }
+
+    /* ==========================================================================
+       GLOBAL FOCUS-BLUR SYSTEM (BLURS ALL OTHER BARS/IMAGES WHEN ONE IS POINTED)
+       ========================================================================== */
+    .focus-item {
+      transition:
+        filter 0.55s var(--ease-out-expo),
+        opacity 0.55s var(--ease-out-expo),
+        transform 0.65s var(--ease-spring),
+        box-shadow 0.65s var(--ease-out-expo);
+      will-change: transform, filter, opacity;
+    }
+
+    body.focus-mode-active .focus-item:not(.is-focused) {
+      filter: blur(5.5px);
+      opacity: 0.52;
+      transform: scale(0.985);
+    }
+
+    body.focus-mode-active .focus-item.is-focused {
+      filter: blur(0px);
+      opacity: 1;
+      z-index: 30;
+    }
+
+    /* ==========================================================================
+       FRAMELESS PHOTOGRAPHY, 3D SPRING BOUNCE & BEHIND-IMAGE GROWING BRANCHES
+       ========================================================================== */
+    .photo-sanctuary-wrap {
+      position: relative;
+      perspective: 1100px;
+      transform-style: preserve-3d;
+    }
+
+    .frameless-photo-shell {
+      position: relative;
+      z-index: 10;
+      border-radius: 22px;
+      overflow: hidden;
+      /* Frameless 3D floating elevation shadow */
+      box-shadow:
+        0 26px 55px -18px rgba(43, 24, 16, 0.25),
+        0 10px 22px -10px rgba(43, 24, 16, 0.14);
+      transition:
+        transform 0.75s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.65s var(--ease-out-expo);
+      will-change: transform, box-shadow;
+      background-color: #D8CBB8;
+    }
+
+    /* Smooth 120Hz 3D Spring Bounce when pointed */
+    .photo-sanctuary-wrap:hover .frameless-photo-shell,
+    .photo-sanctuary-wrap.is-focused .frameless-photo-shell {
+      box-shadow:
+        0 36px 70px -16px rgba(43, 24, 16, 0.32),
+        0 16px 32px -12px rgba(43, 24, 16, 0.18);
+    }
+
+    .frameless-photo-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      /* Color sync filter to harmonize with wood/beige/sage/tranquil-blue theme */
+      filter: sepia(0.11) saturate(0.88) contrast(0.97) brightness(0.99);
+      transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1), filter 0.65s ease;
+      will-change: transform;
+    }
+
+    .photo-sanctuary-wrap:hover .frameless-photo-img,
+    .photo-sanctuary-wrap.is-focused .frameless-photo-img {
+      transform: scale(1.055);
+      filter: sepia(0.06) saturate(0.95) contrast(1.01) brightness(1.01);
+    }
+
+    /* 3D Realistic Branches & Leaves behind every picture & bar */
+    .behind-branch-layer {
+      position: absolute;
+      inset: -68px;
+      z-index: 1;
+      pointer-events: none;
+      overflow: visible;
+    }
+
+    .behind-branch-stem {
+      stroke-dasharray: 280;
+      stroke-dashoffset: 280;
+      transition: stroke-dashoffset 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+      filter: drop-shadow(0 6px 8px rgba(43, 24, 16, 0.22));
+    }
+
+    .behind-branch-leaf {
+      transform-box: fill-box;
+      transform-origin: bottom center;
+      transform: scale(0) rotate(-25deg);
+      opacity: 0;
+      transition:
+        transform 0.78s cubic-bezier(0.34, 1.56, 0.64, 1),
+        opacity 0.55s ease;
+      filter: drop-shadow(0 5px 7px rgba(43, 24, 16, 0.2));
+    }
+
+    .behind-leaf-d1 { transition-delay: 0.08s; }
+    .behind-leaf-d2 { transition-delay: 0.16s; }
+    .behind-leaf-d3 { transition-delay: 0.24s; }
+    .behind-leaf-d4 { transition-delay: 0.32s; }
+
+    /* Trigger realistic branch & leaf growth when pointer is on the picture/bar */
+    .photo-sanctuary-wrap:hover .behind-branch-stem,
+    .photo-sanctuary-wrap.is-focused .behind-branch-stem,
+    .therapy-bar-item:hover .behind-branch-stem,
+    .therapy-bar-item.is-focused .behind-branch-stem {
+      stroke-dashoffset: 0;
+    }
+
+    .photo-sanctuary-wrap:hover .behind-branch-leaf,
+    .photo-sanctuary-wrap.is-focused .behind-branch-leaf,
+    .therapy-bar-item:hover .behind-branch-leaf,
+    .therapy-bar-item.is-focused .behind-branch-leaf {
+      transform: scale(1) rotate(0deg);
+      opacity: 1;
+    }
+
+    /* Interactive Therapy Bars 3D Spring Lift */
+    .therapy-bar-item {
+      position: relative;
+      transition:
+        transform 0.7s cubic-bezier(0.34, 1.56, 0.64, 1),
+        filter 0.55s var(--ease-out-expo),
+        opacity 0.55s var(--ease-out-expo),
+        box-shadow 0.65s var(--ease-out-expo);
+    }
+
+    .therapy-bar-item:hover,
+    .therapy-bar-item.is-focused {
+      transform: translateY(-6px) scale(1.012);
+      box-shadow:
+        0 28px 55px -16px rgba(43, 24, 16, 0.26),
+        inset 0 1px 0 0 rgba(243, 239, 230, 0.75);
+    }
+
+    /* ==========================================================================
+       BOTTOM GROWING REALISTIC 3D WOOD BRANCHES (SCROLL-DRIVEN)
+       ========================================================================== */
+    #bottom-branches-overlay {
+      position: fixed;
+      bottom: -8px;
+      left: 0;
+      right: 0;
+      height: 290px;
+      pointer-events: none;
+      z-index: 35;
+      overflow: visible;
+    }
+
+    .bottom-grow-leaf {
+      transform-box: fill-box;
+      transform-origin: bottom center;
+      transition: transform 0.2s linear;
+    }
+
+    /* ==========================================================================
+       CUSTOM 3D LEAF CURSOR & MINIMAL BLURRED SMOKE CANVAS
+       ========================================================================== */
+    #smoke-trail-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9990;
+    }
+
+    #falling-leaves-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 32;
+    }
+
+    #leaf-cursor {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 38px;
+      height: 38px;
+      pointer-events: none;
+      z-index: 10000;
+      will-change: transform;
+      display: none;
+      filter: drop-shadow(0 6px 10px rgba(43, 24, 16, 0.28));
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      #leaf-cursor {
+        display: block;
+      }
+    }
+
+    /* Breathing mindfulness orb animation */
+    @keyframes calmPulseOrb {
+      0%, 100% {
+        transform: scale(0.88);
+        box-shadow: 0 0 0 0 rgba(74, 46, 27, 0.15);
+      }
+      50% {
+        transform: scale(1.14);
+        box-shadow: 0 0 0 28px rgba(74, 46, 27, 0);
+      }
+    }
+
+    .mindful-orb {
+      animation: calmPulseOrb 8s ease-in-out infinite;
+    }
+
+    /* Custom Scrollbar in Wood & Sage Tones */
+    ::-webkit-scrollbar {
+      width: 10px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #EFECE4;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #9CAF96;
+      border-radius: 9999px;
+      border: 2px solid #EFECE4;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #5C3A21;
+    }
+  </style>
+</head>
+
+<body class="bg-sanctuary-flow organic-grain selection:bg-sanctuary-moss selection:text-wood-deepest">
+
+  <!-- ==========================================================================
+       SHARED 3D SVG GRADIENTS & FILTERS FOR REALISTIC WOOD BARK & BOTANICAL LEAVES
+       ========================================================================== -->
+  <svg width="0" height="0" class="fixed pointer-events-none opacity-0" aria-hidden="true">
+    <defs>
+      <!-- Realistic 3D Wood Bark Linear Gradient -->
+      <linearGradient id="woodBark3D" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#7A4B2A" />
+        <stop offset="45%" stop-color="#4A2E1B" />
+        <stop offset="100%" stop-color="#2B1810" />
+      </linearGradient>
+
+      <!-- Warm Secondary Twig Gradient -->
+      <linearGradient id="twigBark3D" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#3B2314" />
+        <stop offset="60%" stop-color="#6B442A" />
+        <stop offset="100%" stop-color="#8A5A36" />
+      </linearGradient>
+
+      <!-- Realistic 3D Botanical Leaf Gradient (Sunlit Sage to Deep Moss) -->
+      <linearGradient id="leaf3DMain" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#9EB496" />
+        <stop offset="50%" stop-color="#6E8B67" />
+        <stop offset="100%" stop-color="#3F573B" />
+      </linearGradient>
+
+      <!-- Secondary Soft Eucalyptus Leaf Gradient -->
+      <linearGradient id="leaf3DSoft" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stop-color="#B5C7B0" />
+        <stop offset="55%" stop-color="#7E9978" />
+        <stop offset="100%" stop-color="#4B6447" />
+      </linearGradient>
+
+      <!-- 3D Elevation Shadow Filter -->
+      <filter id="drop3D" x="-20%" y="-20%" width="140%" height="140%">
+        <feDropShadow dx="2" dy="5" stdDeviation="4" flood-color="#2B1810" flood-opacity="0.24" />
+      </filter>
+
+      <!-- Reusable Realistic 3D Leaf Symbol -->
+      <g id="realistic-leaf-pod">
+        <!-- Leaf Blade -->
+        <path d="M 0,0 C -10,-12 -12,-28 0,-42 C 12,-28 10,-12 0,0 Z" fill="url(#leaf3DMain)" />
+        <!-- Highlight Half for 3D Curvature -->
+        <path d="M 0,0 C -10,-12 -12,-28 0,-42 C -1,-26 -1,-12 0,0 Z" fill="#C7D8C1" opacity="0.32" />
+        <!-- Central Wood/Stem Vein -->
+        <path d="M 0,2 L 0,-36" stroke="#3B2314" stroke-width="1.2" stroke-linecap="round" opacity="0.65" />
+        <path d="M 0,-12 L -5,-18 M 0,-20 L 5,-26 M 0,-27 L -4,-32" stroke="#3B2314" stroke-width="0.75" stroke-linecap="round" opacity="0.45" />
+      </g>
+
+      <!-- Reusable Small Olive/Eucalyptus Leaf Symbol -->
+      <g id="small-leaf-pod">
+        <path d="M 0,0 C -7,-9 -8,-20 0,-30 C 8,-20 7,-9 0,0 Z" fill="url(#leaf3DSoft)" />
+        <path d="M 0,0 C -7,-9 -8,-20 0,-30 C -1,-18 -1,-9 0,0 Z" fill="#E3ECE0" opacity="0.3" />
+        <path d="M 0,1 L 0,-25" stroke="#3B2314" stroke-width="1" stroke-linecap="round" opacity="0.6" />
+      </g>
+    </defs>
+  </svg>
+
+  <!-- ==========================================================================
+       1. INTERACTIVE INTRO SPLASH SCREEN (FIRST ANIMATION)
+       Only shows "Ranniya's" on solid minimal bg with growing 3D branches & leaves.
+       Clicking or tapping anywhere opens the entire website smoothly.
+       ========================================================================== -->
+  <div id="splash-screen" role="button" tabindex="0" aria-label="Enter Ranniya's Sanctuary">
+    <div class="relative flex flex-col items-center justify-center px-6 py-12 max-w-3xl w-full text-center select-none splash-breathe">
+
+      <!-- Realistic 3D Growing Branches & Leaves Behind and Around "Ranniya's" -->
+      <div class="relative flex items-center justify-center w-full py-12">
+        <svg class="w-[340px] sm:w-[540px] md:w-[680px] h-[250px] sm:h-[320px] overflow-visible pointer-events-none" viewBox="0 0 680 320" fill="none">
+          <!-- Left Main 3D Wood Branch Growing Outward from Center -->
+          <path class="splash-branch-path" filter="url(#drop3D)"
+                d="M 340,175 C 275,178 225,152 165,126 C 115,104 75,112 28,92"
+                stroke="url(#woodBark3D)" stroke-width="6.5" stroke-linecap="round" />
+          <!-- Left Secondary Wood Sub-Branches -->
+          <path class="splash-twig-path" filter="url(#drop3D)"
+                d="M 235,158 C 205,122 175,92 132,72"
+                stroke="url(#twigBark3D)" stroke-width="3.8" stroke-linecap="round" />
+          <path class="splash-twig-path" filter="url(#drop3D)"
+                d="M 155,124 C 122,145 92,168 52,174"
+                stroke="url(#twigBark3D)" stroke-width="3.2" stroke-linecap="round" />
+
+          <!-- Right Main 3D Wood Branch Growing Outward from Center -->
+          <path class="splash-branch-path" filter="url(#drop3D)"
+                d="M 340,165 C 405,162 465,184 525,146 C 572,116 612,120 652,96"
+                stroke="url(#woodBark3D)" stroke-width="6.5" stroke-linecap="round" />
+          <!-- Right Secondary Wood Sub-Branches -->
+          <path class="splash-twig-path" filter="url(#drop3D)"
+                d="M 445,172 C 478,134 510,96 555,78"
+                stroke="url(#twigBark3D)" stroke-width="3.8" stroke-linecap="round" />
+          <path class="splash-twig-path" filter="url(#drop3D)"
+                d="M 532,142 C 565,164 598,176 632,172"
+                stroke="url(#twigBark3D)" stroke-width="3.2" stroke-linecap="round" />
+
+          <!-- Center Subtle Upper & Lower Arching Twigs -->
+          <path class="splash-twig-path" filter="url(#drop3D)"
+                d="M 295,168 C 312,120 342,98 378,86"
+                stroke="url(#twigBark3D)" stroke-width="3" stroke-linecap="round" />
+          <path class="splash-twig-path" filter="url(#drop3D)"
+                d="M 375,172 C 358,212 325,228 288,236"
+                stroke="url(#twigBark3D)" stroke-width="2.8" stroke-linecap="round" />
+
+          <!-- Realistic 3D Unfurling Botanical Leaves (Left Cluster) -->
+          <g transform="translate(215, 148) rotate(-38)">
+            <use href="#realistic-leaf-pod" class="splash-leaf-node splash-leaf-delay-1" />
+          </g>
+          <g transform="translate(132, 72) rotate(-52)">
+            <use href="#realistic-leaf-pod" class="splash-leaf-node splash-leaf-delay-2" />
+          </g>
+          <g transform="translate(178, 108) rotate(28)">
+            <use href="#small-leaf-pod" class="splash-leaf-node splash-leaf-delay-3" />
+          </g>
+          <g transform="translate(88, 108) rotate(-25)">
+            <use href="#realistic-leaf-pod" class="splash-leaf-node splash-leaf-delay-3" />
+          </g>
+          <g transform="translate(52, 174) rotate(-115)">
+            <use href="#small-leaf-pod" class="splash-leaf-node splash-leaf-delay-4" />
+          </g>
+          <g transform="translate(28, 92) rotate(-68)">
+            <use href="#realistic-leaf-pod" class="splash-leaf-node splash-leaf-delay-5" />
+          </g>
+
+          <!-- Realistic 3D Unfurling Botanical Leaves (Center Accents) -->
+          <g transform="translate(378, 86) rotate(45)">
+            <use href="#small-leaf-pod" class="splash-leaf-node splash-leaf-delay-2" />
+          </g>
+          <g transform="translate(288, 236) rotate(-135)">
+            <use href="#small-leaf-pod" class="splash-leaf-node splash-leaf-delay-3" />
+          </g>
+
+          <!-- Realistic 3D Unfurling Botanical Leaves (Right Cluster) -->
+          <g transform="translate(468, 165) rotate(36)">
+            <use href="#realistic-leaf-pod" class="splash-leaf-node splash-leaf-delay-1" />
+          </g>
+          <g transform="translate(555, 78) rotate(52)">
+            <use href="#realistic-leaf-pod" class="splash-leaf-node splash-leaf-delay-2" />
+          </g>
+          <g transform="translate(505, 112) rotate(-24)">
+            <use href="#small-leaf-pod" class="splash-leaf-node splash-leaf-delay-3" />
+          </g>
+          <g transform="translate(592, 118) rotate(28)">
+            <use href="#realistic-leaf-pod" class="splash-leaf-node splash-leaf-delay-4" />
+          </g>
+          <g transform="translate(632, 172) rotate(112)">
+            <use href="#small-leaf-pod" class="splash-leaf-node splash-leaf-delay-4" />
+          </g>
+          <g transform="translate(652, 96) rotate(64)">
+            <use href="#realistic-leaf-pod" class="splash-leaf-node splash-leaf-delay-5" />
+          </g>
+        </svg>
+
+        <!-- Centered Headline "Ranniya's" in Rich Dark Wood Brown -->
+        <div class="absolute inset-0 flex flex-col items-center justify-center z-10 px-4">
+          <div class="px-7 py-3 rounded-full bg-[#EFECE4]/85 backdrop-blur-sm shadow-sm">
+            <h1 class="font-serif text-5xl sm:text-7xl md:text-8xl font-semibold tracking-wide text-wood-deepest"
+                style="text-shadow: 0 8px 24px rgba(43, 24, 16, 0.14);">
+              Ranniya’s
+            </h1>
+          </div>
+          <p class="mt-3 font-sans text-xs sm:text-sm uppercase tracking-[0.32em] font-medium text-wood-dark">
+            Psychology &amp; Human Therapy Sanctuary
+          </p>
+        </div>
+      </div>
+
+      <!-- Minimal Enter Prompt -->
+      <div class="mt-6 flex flex-col items-center gap-3">
+        <span class="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full wood-green-bar text-wood-deepest text-xs sm:text-sm tracking-[0.2em] uppercase font-medium transition-transform duration-500 hover:scale-105">
+          <span class="w-2 h-2 rounded-full bg-wood-deepest animate-ping"></span>
+          Tap or click anywhere to enter sanctuary
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       2. CUSTOM 3D LEAF POINTER & VERY MINIMAL BLURRED SMOKE TRAIL CANVAS
+       ========================================================================== -->
+  <canvas id="smoke-trail-canvas" aria-hidden="true"></canvas>
+  <canvas id="falling-leaves-canvas" aria-hidden="true"></canvas>
+
+  <!-- Realistic 3D Leaf Mouse Cursor -->
+  <div id="leaf-cursor" aria-hidden="true">
+    <svg viewBox="0 0 48 48" class="w-full h-full overflow-visible">
+      <g transform="translate(6, 4) rotate(-28)">
+        <!-- 3D Leaf Body -->
+        <path d="M 0,34 C -10,22 -11,8 0,-4 C 11,8 10,22 0,34 Z" fill="url(#leaf3DMain)" />
+        <!-- 3D Sunlit Bevel Half -->
+        <path d="M 0,34 C -10,22 -11,8 0,-4 C -1,10 -1,22 0,34 Z" fill="#D5E3D0" opacity="0.38" />
+        <!-- Wood Petiole & Midrib Vein -->
+        <path d="M 0,39 L 0,1" stroke="#2B1810" stroke-width="1.6" stroke-linecap="round" />
+        <path d="M 0,24 L -5,18 M 0,16 L 5,11 M 0,10 L -4,5" stroke="#2B1810" stroke-width="0.9" stroke-linecap="round" opacity="0.55" />
+      </g>
+    </svg>
+  </div>
+
+  <!-- ==========================================================================
+       3. STICKY UPPER HEADER BAR WITH DARKER WOOD-GREEN TEMPLATE &
+          INTERTWINED 3D BRANCH DECORATIONS ON "RANNIYA'S"
+       ========================================================================== -->
+  <header class="fixed top-0 left-0 right-0 z-50 wood-green-header transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-4 sm:px-8 h-20 sm:h-24 flex items-center justify-between">
+
+      <!-- Head Name "Ranniya's" with Simple & Minimal 3D Branch & Leaf Decorations on Hover -->
+      <a href="#top-sanctuary" class="brand-logo-wrap group rounded-2xl focus:outline-none" aria-label="Ranniya's Home">
+        <!-- Intertwined 3D Branch & Leaf SVG Behind/Around Header Brand Name -->
+        <svg class="absolute -inset-x-3 -inset-y-2 w-[calc(100%+24px)] h-[calc(100%+16px)] pointer-events-none overflow-visible" viewBox="0 0 240 76" fill="none">
+          <!-- Simple minimal brown wood branch curving under and around "Ranniya's" -->
+          <path class="header-branch-path" filter="url(#drop3D)"
+                d="M 16,56 C 68,64 148,60 218,46 C 228,43 232,34 226,24"
+                stroke="url(#woodBark3D)" stroke-width="2.6" stroke-linecap="round" />
+          <!-- Upper delicate left twig -->
+          <path class="header-branch-path" filter="url(#drop3D)"
+                d="M 42,57 C 24,46 14,30 22,15"
+                stroke="url(#twigBark3D)" stroke-width="2" stroke-linecap="round" />
+          <!-- Tiny 3D Botanical Leaves that Bloom & Sway on Hover -->
+          <g class="header-leaf header-leaf-1" transform="translate(22, 16) rotate(-32) scale(0.45)">
+            <use href="#realistic-leaf-pod" />
+          </g>
+          <g class="header-leaf header-leaf-2" transform="translate(82, 60) rotate(125) scale(0.38)">
+            <use href="#small-leaf-pod" />
+          </g>
+          <g class="header-leaf header-leaf-3" transform="translate(174, 54) rotate(68) scale(0.42)">
+            <use href="#small-leaf-pod" />
+          </g>
+          <g class="header-leaf header-leaf-4" transform="translate(226, 24) rotate(36) scale(0.46)">
+            <use href="#realistic-leaf-pod" />
+          </g>
+        </svg>
+
+        <div class="relative z-10 flex flex-col">
+          <span class="brand-logo-text font-serif text-3xl sm:text-4xl font-semibold text-wood-deepest tracking-wide">
+            Ranniya’s
+          </span>
+          <span class="text-[10px] uppercase tracking-[0.26em] font-medium text-wood-dark -mt-1">
+            Mindful Sanctuary
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Bars (Participates in Focus-Blur & Wood-Green Styling) -->
+      <nav class="hidden lg:flex items-center gap-2 xl:gap-3" aria-label="Primary Navigation">
+        <a href="#top-sanctuary" class="focus-item px-4 py-2 rounded-full text-sm font-medium text-wood-deepest hover:bg-sanctuary-beige/65 transition-all">
+          Sanctuary
+        </a>
+        <a href="#therapy-gallery" class="focus-item px-4 py-2 rounded-full text-sm font-medium text-wood-deepest hover:bg-sanctuary-beige/65 transition-all">
+          Mindful Care
+        </a>
+        <a href="#holistic-bars" class="focus-item px-4 py-2 rounded-full text-sm font-medium text-wood-deepest hover:bg-sanctuary-beige/65 transition-all">
+          Therapy Sessions
+        </a>
+        <a href="#botanical-calm" class="focus-item px-4 py-2 rounded-full text-sm font-medium text-wood-deepest hover:bg-sanctuary-beige/65 transition-all">
+          Botanical Calm
+        </a>
+        <a href="#sanctuary-connect" class="focus-item ml-2 px-5 py-2.5 rounded-full bg-wood-tint/90 hover:bg-wood-tint text-sm font-semibold text-wood-deepest shadow-sm transition-all">
+          Begin Healing
+        </a>
+        <button id="replay-intro-btn" type="button" title="Replay Botanical Intro"
+                class="focus-item ml-1 p-2.5 rounded-full bg-sanctuary-beige/60 hover:bg-sanctuary-beige text-wood-deepest transition-all"
+                aria-label="Replay Intro Animation">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="#2B1810" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22c4.97 0 9-4.03 9-9-4.97 0-9 4.03-9 9z"/>
+            <path d="M12 22c-4.97 0-9-4.03-9-9 4.97 0 9 4.03 9 9z"/>
+            <path d="M12 22V8"/>
+          </svg>
+        </button>
+      </nav>
+
+      <!-- Mobile Hamburger Trigger -->
+      <div class="flex items-center gap-2 lg:hidden">
+        <button id="mobile-replay-btn" type="button"
+                class="p-2.5 rounded-xl bg-sanctuary-beige/65 text-wood-deepest text-xs font-medium"
+                aria-label="Replay Intro">
+          Intro
+        </button>
+        <button id="mobile-menu-btn" type="button"
+                class="p-3 rounded-xl bg-sanctuary-beige/75 text-wood-deepest focus:outline-none"
+                aria-label="Toggle Menu" aria-expanded="false">
+          <svg id="menu-icon-open" class="w-6 h-6" fill="none" stroke="#2B1810" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 7h16M4 12h16M4 17h12" />
+          </svg>
+          <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" stroke="#2B1810" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Responsive Drawer -->
+    <div id="mobile-drawer" class="hidden lg:hidden border-t border-wood-deepest/10 px-6 py-5 space-y-3 bg-[#C7D2C4]/95 backdrop-blur-md">
+      <a href="#top-sanctuary" class="mobile-nav-link block py-2.5 px-4 rounded-xl text-base font-medium text-wood-deepest hover:bg-sanctuary-beige/60">
+        Sanctuary
+      </a>
+      <a href="#therapy-gallery" class="mobile-nav-link block py-2.5 px-4 rounded-xl text-base font-medium text-wood-deepest hover:bg-sanctuary-beige/60">
+        Mindful Care Gallery
+      </a>
+      <a href="#holistic-bars" class="mobile-nav-link block py-2.5 px-4 rounded-xl text-base font-medium text-wood-deepest hover:bg-sanctuary-beige/60">
+        Therapy Sessions
+      </a>
+      <a href="#botanical-calm" class="mobile-nav-link block py-2.5 px-4 rounded-xl text-base font-medium text-wood-deepest hover:bg-sanctuary-beige/60">
+        Botanical Calm
+      </a>
+      <a href="#sanctuary-connect" class="mobile-nav-link block py-3 px-4 rounded-xl text-center font-semibold bg-wood-tint text-wood-deepest">
+        Begin Healing Session
+      </a>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       MAIN LONG SANCTUARY CONTENT
+       ========================================================================== -->
+  <main id="top-sanctuary" class="relative z-10 pt-28 sm:pt-36 pb-36">
+
+    <!-- ========================================================================
+         SECTION 1: HERO SANCTUARY SECTION
+         ======================================================================== -->
+    <section class="relative max-w-7xl mx-auto px-4 sm:px-8 pt-6 pb-24 md:py-20">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-10 items-center">
+
+        <!-- Left Editorial Hero Column -->
+        <div class="lg:col-span-6 space-y-8" data-parallax-up="0.06">
+          <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full wood-green-bar">
+            <span class="w-2.5 h-2.5 rounded-full bg-wood-deepest"></span>
+            <span class="text-xs sm:text-sm font-medium tracking-[0.2em] uppercase text-wood-deepest">
+              Private Human Therapy &amp; Stillness
+            </span>
+          </div>
+
+          <div class="space-y-4">
+            <h2 class="font-serif text-5xl sm:text-6xl xl:text-7xl font-semibold leading-[1.08] text-wood-deepest">
+              Ranniya’s — <br />
+              <span class="italic font-normal text-wood-dark">Quiet Mind,</span> <br />
+              Grounded Soul.
+            </h2>
+            <p class="font-sans text-base sm:text-lg leading-relaxed text-wood-medium max-w-xl font-normal">
+              Step into an unhurried botanical sanctuary where clinical psychology meets restorative human warmth. Surrounded by natural wood, soft morning light, and tranquil stillness, every conversation is crafted to unburden your nervous system.
+            </p>
+          </div>
+
+          <!-- Interactive Upper Template Action Bars -->
+          <div class="flex flex-wrap items-center gap-4 pt-2">
+            <a href="#sanctuary-connect"
+               class="focus-item therapy-bar-item wood-green-bar px-8 py-4 rounded-2xl font-medium text-sm sm:text-base tracking-wider uppercase text-wood-deepest inline-flex items-center gap-3">
+              <span>Reserve Quiet Session</span>
+              <svg class="w-5 h-5" fill="none" stroke="#2B1810" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+
+            <a href="#therapy-gallery"
+               class="focus-item px-7 py-4 rounded-2xl bg-sanctuary-blue/80 hover:bg-sanctuary-blueDeep text-sm sm:text-base font-medium text-wood-deepest transition-all">
+              Explore Sanctuary Spaces
+            </a>
+          </div>
+
+          <!-- Key Grounding Pillars -->
+          <div class="grid grid-cols-3 gap-4 pt-6 border-t border-wood-deepest/15">
+            <div class="focus-item p-3.5 rounded-2xl wood-green-card">
+              <p class="font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">1 : 1</p>
+              <p class="text-xs font-medium text-wood-dark mt-1">Unhurried Human Presence</p>
+            </div>
+            <div class="focus-item p-3.5 rounded-2xl wood-green-card">
+              <p class="font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">100%</p>
+              <p class="text-xs font-medium text-wood-dark mt-1">Confidential Sensory Calm</p>
+            </div>
+            <div class="focus-item p-3.5 rounded-2xl wood-green-card">
+              <p class="font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Somatic</p>
+              <p class="text-xs font-medium text-wood-dark mt-1">&amp; Restorative Talk Care</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Frameless Hero Photography with 3D Sprouting Wood Branches & Leaves Behind -->
+        <div class="lg:col-span-6 flex justify-center">
+          <div class="focus-item photo-sanctuary-wrap w-full max-w-lg" data-tilt-card>
+
+            <!-- 3D Branches & Leaves Hidden Behind the Picture (Sprouts Outward on Hover/Point) -->
+            <svg class="behind-branch-layer" viewBox="0 0 600 680" fill="none">
+              <!-- Top-Right Growing 3D Wood Branch -->
+              <path class="behind-branch-stem"
+                    d="M 430,115 C 485,78 528,45 572,18"
+                    stroke="url(#woodBark3D)" stroke-width="6" stroke-linecap="round" />
+              <path class="behind-branch-stem"
+                    d="M 488,75 C 525,84 556,78 585,64"
+                    stroke="url(#twigBark3D)" stroke-width="3.6" stroke-linecap="round" />
+              <g transform="translate(532, 42) rotate(38)">
+                <use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d1" />
+              </g>
+              <g transform="translate(572, 18) rotate(56)">
+                <use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d2" />
+              </g>
+              <g transform="translate(585, 64) rotate(88)">
+                <use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d3" />
+              </g>
+
+              <!-- Top-Left Growing 3D Wood Branch -->
+              <path class="behind-branch-stem"
+                    d="M 155,120 C 102,75 64,42 22,20"
+                    stroke="url(#woodBark3D)" stroke-width="5.5" stroke-linecap="round" />
+              <g transform="translate(74, 52) rotate(-42)">
+                <use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d1" />
+              </g>
+              <g transform="translate(22, 20) rotate(-62)">
+                <use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d3" />
+              </g>
+
+              <!-- Bottom-Left Growing 3D Wood Branch -->
+              <path class="behind-branch-stem"
+                    d="M 140,545 C 88,578 48,608 16,646"
+                    stroke="url(#woodBark3D)" stroke-width="5.5" stroke-linecap="round" />
+              <g transform="translate(65, 595) rotate(-132)">
+                <use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d2" />
+              </g>
+              <g transform="translate(16, 646) rotate(-145)">
+                <use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d4" />
+              </g>
+
+              <!-- Bottom-Right Growing 3D Wood Branch -->
+              <path class="behind-branch-stem"
+                    d="M 455,540 C 508,572 548,602 584,638"
+                    stroke="url(#woodBark3D)" stroke-width="5.2" stroke-linecap="round" />
+              <g transform="translate(534, 592) rotate(125)">
+                <use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d2" />
+              </g>
+              <g transform="translate(584, 638) rotate(142)">
+                <use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d4" />
+              </g>
+            </svg>
+
+            <!-- Frameless Realistic Photography Shell -->
+            <div class="frameless-photo-shell aspect-[4/5] w-full">
+              <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=85"
+                   onerror="this.onerror=null;this.src='https://placehold.co/800x1000/D8CBB8/2B1810?text=Ranniyas+Sanctuary';"
+                   alt="Calm peaceful human posture in morning sunlight without showing full face"
+                   class="frameless-photo-img" />
+            </div>
+
+            <!-- Upward Parallax Floating Botanical Caption Pill -->
+            <div class="mt-5 flex items-center justify-between px-5 py-3.5 rounded-2xl wood-green-bar" data-parallax-up="0.09">
+              <div>
+                <p class="font-serif text-lg font-semibold text-wood-deepest">Morning Light &amp; Somatic Grounding</p>
+                <p class="text-xs text-wood-dark">Point on any sanctuary photograph to awaken its living branches</p>
+              </div>
+              <span class="text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full bg-sanctuary-beige/75 text-wood-deepest">
+                Calm 01
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         UPWARD FLOATING THERAPEUTIC QUOTE BANNER (MOVES UP WHILE SCROLLING DOWN)
+         ======================================================================== -->
+    <div class="max-w-5xl mx-auto px-4 sm:px-8 my-8" data-parallax-up="0.14">
+      <div class="focus-item wood-green-card rounded-3xl p-8 sm:p-12 text-center">
+        <p class="font-display italic text-2xl sm:text-3xl md:text-4xl leading-relaxed text-wood-deepest">
+          “Healing begins the moment the body realizes it no longer needs to brace against the world.”
+        </p>
+        <p class="mt-4 font-sans text-xs sm:text-sm uppercase tracking-[0.28em] font-semibold text-wood-dark">
+          — Ranniya’s Center for Restorative Psychology
+        </p>
+      </div>
+    </div>
+
+    <!-- ========================================================================
+         SECTION 2: STRESS-FREE HUMAN THERAPY GALLERY (6 FRAMELESS PHOTOGRAPHY BLOCKS)
+         - Minimal solid/blended backgrounds
+         - Human faces are understated/not directly shown (hands, tea, silhouettes, nature)
+         - 120Hz smooth 3D bounce + behind-image realistic branches & leaves on hover
+         - Global focus-blur on all other cards when pointing on one
+         ======================================================================== -->
+    <section id="therapy-gallery" class="max-w-7xl mx-auto px-4 sm:px-8 py-24">
+      <div class="max-w-3xl mb-16" data-parallax-up="0.08">
+        <span class="inline-block px-4 py-1.5 rounded-full wood-green-bar text-xs font-semibold uppercase tracking-[0.24em] text-wood-deepest">
+          Frameless Sensory Moments
+        </span>
+        <h3 class="mt-4 font-serif text-4xl sm:text-5xl md:text-6xl font-semibold text-wood-deepest">
+          Spaces Crafted for Unhurried Human Care
+        </h3>
+        <p class="mt-4 text-base sm:text-lg text-wood-medium leading-relaxed">
+          Move your leaf pointer over any photograph below. Notice how every surrounding element gently softens into a quiet blur while realistic wood branches and botanical leaves sprout from behind your chosen moment.
+        </p>
+      </div>
+
+      <!-- 6 Minimal Frameless Staggered Photography Blocks -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 lg:gap-14 items-start">
+
+        <!-- GALLERY ITEM 1: Warm Ceramic Tea in Gentle Hands -->
+        <article class="focus-item photo-sanctuary-wrap" data-tilt-card data-parallax-up="0.05">
+          <svg class="behind-branch-layer" viewBox="0 0 500 580" fill="none">
+            <path class="behind-branch-stem" d="M 120,105 C 78,64 42,35 12,14" stroke="url(#woodBark3D)" stroke-width="5" stroke-linecap="round" />
+            <path class="behind-branch-stem" d="M 380,110 C 425,68 458,40 488,16" stroke="url(#woodBark3D)" stroke-width="5" stroke-linecap="round" />
+            <path class="behind-branch-stem" d="M 375,465 C 422,502 456,528 486,558" stroke="url(#twigBark3D)" stroke-width="4.5" stroke-linecap="round" />
+            <g transform="translate(55, 42) rotate(-45)"><use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d1" /></g>
+            <g transform="translate(12, 14) rotate(-65)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d2" /></g>
+            <g transform="translate(442, 48) rotate(45)"><use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d1" /></g>
+            <g transform="translate(488, 16) rotate(65)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d3" /></g>
+            <g transform="translate(454, 526) rotate(132)"><use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d4" /></g>
+          </svg>
+
+          <div class="frameless-photo-shell aspect-[4/5]">
+            <img src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?auto=format&fit=crop&w=900&q=85"
+                 onerror="this.onerror=null;this.src='https://placehold.co/700x875/D8CBB8/2B1810?text=Warm+Herbal+Ritual';"
+                 alt="Gentle hands cradling a warm minimalist ceramic cup of calming tea"
+                 class="frameless-photo-img" />
+          </div>
+          <div class="mt-5 px-2">
+            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-wood-dark">01 / Sensory Arrival</span>
+            <h4 class="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Warm Herbal Grounding</h4>
+            <p class="mt-1.5 text-sm text-wood-medium leading-relaxed">
+              Every session begins with warm botanical infusions held in handcrafted stoneware to settle the hands and breath.
+            </p>
+          </div>
+        </article>
+
+        <!-- GALLERY ITEM 2: Quiet Human Presence & Linen Stillness (Offset Downward) -->
+        <article class="focus-item photo-sanctuary-wrap md:mt-12" data-tilt-card data-parallax-up="0.11">
+          <svg class="behind-branch-layer" viewBox="0 0 500 580" fill="none">
+            <path class="behind-branch-stem" d="M 375,98 C 425,58 460,32 490,10" stroke="url(#woodBark3D)" stroke-width="5.2" stroke-linecap="round" />
+            <path class="behind-branch-stem" d="M 118,468 C 72,505 38,534 10,564" stroke="url(#woodBark3D)" stroke-width="5" stroke-linecap="round" />
+            <path class="behind-branch-stem" d="M 115,120 C 68,84 36,60 12,40" stroke="url(#twigBark3D)" stroke-width="4.2" stroke-linecap="round" />
+            <g transform="translate(448, 38) rotate(48)"><use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d1" /></g>
+            <g transform="translate(490, 10) rotate(68)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d2" /></g>
+            <g transform="translate(48, 526) rotate(-135)"><use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d2" /></g>
+            <g transform="translate(10, 564) rotate(-152)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d4" /></g>
+            <g transform="translate(42, 62) rotate(-52)"><use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d3" /></g>
+          </svg>
+
+          <div class="frameless-photo-shell aspect-[4/5]">
+            <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=900&q=85"
+                 onerror="this.onerror=null;this.src='https://placehold.co/700x875/D8E2E5/2B1810?text=Mindful+Stillness';"
+                 alt="Peaceful silhouette sitting in tranquil nature light from behind"
+                 class="frameless-photo-img" />
+          </div>
+          <div class="mt-5 px-2">
+            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-wood-dark">02 / Unburdened Mind</span>
+            <h4 class="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Quiet Horizon Reflection</h4>
+            <p class="mt-1.5 text-sm text-wood-medium leading-relaxed">
+              Without harsh lighting or clinical sterility, you are free to look inward at your own gentle pace.
+            </p>
+          </div>
+        </article>
+
+        <!-- GALLERY ITEM 3: Compassionate Human Hand Support -->
+        <article class="focus-item photo-sanctuary-wrap lg:mt-24" data-tilt-card data-parallax-up="0.07">
+          <svg class="behind-branch-layer" viewBox="0 0 500 580" fill="none">
+            <path class="behind-branch-stem" d="M 122,102 C 74,62 40,34 10,12" stroke="url(#woodBark3D)" stroke-width="5.2" stroke-linecap="round" />
+            <path class="behind-branch-stem" d="M 382,462 C 428,498 462,530 492,562" stroke="url(#woodBark3D)" stroke-width="5.2" stroke-linecap="round" />
+            <path class="behind-branch-stem" d="M 385,118 C 432,82 465,58 490,38" stroke="url(#twigBark3D)" stroke-width="4" stroke-linecap="round" />
+            <g transform="translate(52, 42) rotate(-48)"><use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d1" /></g>
+            <g transform="translate(10, 12) rotate(-64)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d3" /></g>
+            <g transform="translate(452, 522) rotate(135)"><use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d2" /></g>
+            <g transform="translate(492, 562) rotate(148)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d4" /></g>
+            <g transform="translate(458, 60) rotate(54)"><use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d2" /></g>
+          </svg>
+
+          <div class="frameless-photo-shell aspect-[4/5]">
+            <img src="https://images.unsplash.com/photo-1516585427167-9f4af9627e6c?auto=format&fit=crop&w=900&q=85"
+                 onerror="this.onerror=null;this.src='https://placehold.co/700x875/DCE3D8/2B1810?text=Compassionate+Care';"
+                 alt="Gentle supportive hands resting together in warm natural light"
+                 class="frameless-photo-img" />
+          </div>
+          <div class="mt-5 px-2">
+            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-wood-dark">03 / Relational Safety</span>
+            <h4 class="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Empathetic Human Connection</h4>
+            <p class="mt-1.5 text-sm text-wood-medium leading-relaxed">
+              Grounded, trauma-informed therapy that honors dignity, privacy, and deep emotional attunement.
+            </p>
+          </div>
+        </article>
+
+        <!-- GALLERY ITEM 4: Zen Balance Stones & Water Calm -->
+        <article class="focus-item photo-sanctuary-wrap" data-tilt-card data-parallax-up="0.09">
+          <svg class="behind-branch-layer" viewBox="0 0 500 580" fill="none">
+            <path class="behind-branch-stem" d="M 118,468 C 70,506 36,536 8,566" stroke="url(#woodBark3D)" stroke-width="5.2" stroke-linecap="round" />
+            <path class="behind-branch-stem" d="M 380,104 C 426,64 460,36 490,14" stroke="url(#woodBark3D)" stroke-width="5" stroke-linecap="round" />
+            <g transform="translate(46, 528) rotate(-132)"><use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d1" /></g>
+            <g transform="translate(8, 566) rotate(-150)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d3" /></g>
+            <g transform="translate(448, 44) rotate(46)"><use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d2" /></g>
+            <g transform="translate(490, 14) rotate(64)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d4" /></g>
+          </svg>
+
+          <div class="frameless-photo-shell aspect-[4/5]">
+            <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=900&q=85"
+                 onerror="this.onerror=null;this.src='https://placehold.co/700x875/C7D2C4/2B1810?text=Somatic+Equilibrium';"
+                 alt="Minimalist balanced zen stones in calm tranquil water"
+                 class="frameless-photo-img" />
+          </div>
+          <div class="mt-5 px-2">
+            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-wood-dark">04 / Nervous System Reset</span>
+            <h4 class="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Restorative Equilibrium</h4>
+            <p class="mt-1.5 text-sm text-wood-medium leading-relaxed">
+              Releasing chronic tension through gentle somatic pacing, acoustic quietude, and natural textures.
+            </p>
+          </div>
+        </article>
+
+        <!-- GALLERY ITEM 5: Mindful Journaling & Wood Desk Sanctuary -->
+        <article class="focus-item photo-sanctuary-wrap md:mt-12" data-tilt-card data-parallax-up="0.13">
+          <svg class="behind-branch-layer" viewBox="0 0 500 580" fill="none">
+            <path class="behind-branch-stem" d="M 118,104 C 72,62 38,34 10,12" stroke="url(#woodBark3D)" stroke-width="5.2" stroke-linecap="round" />
+            <path class="behind-branch-stem" d="M 382,468 C 430,504 462,534 490,564" stroke="url(#woodBark3D)" stroke-width="5.2" stroke-linecap="round" />
+            <g transform="translate(50, 42) rotate(-46)"><use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d1" /></g>
+            <g transform="translate(10, 12) rotate(-66)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d3" /></g>
+            <g transform="translate(450, 526) rotate(134)"><use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d2" /></g>
+            <g transform="translate(490, 564) rotate(150)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d4" /></g>
+          </svg>
+
+          <div class="frameless-photo-shell aspect-[4/5]">
+            <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=85"
+                 onerror="this.onerror=null;this.src='https://placehold.co/700x875/D8CBB8/2B1810?text=Reflective+Writing';"
+                 alt="Minimalist open journal on warm natural wood table with soft shadows"
+                 class="frameless-photo-img" />
+          </div>
+          <div class="mt-5 px-2">
+            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-wood-dark">05 / Narrative Clarity</span>
+            <h4 class="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Reflective Integration</h4>
+            <p class="mt-1.5 text-sm text-wood-medium leading-relaxed">
+              Untangling complex life transitions on warm timber surfaces with guided expressive reflection.
+            </p>
+          </div>
+        </article>
+
+        <!-- GALLERY ITEM 6: Botanical Mist & Forest Walk Therapy -->
+        <article class="focus-item photo-sanctuary-wrap lg:mt-24" data-tilt-card data-parallax-up="0.08">
+          <svg class="behind-branch-layer" viewBox="0 0 500 580" fill="none">
+            <path class="behind-branch-stem" d="M 380,102 C 426,62 460,34 490,12" stroke="url(#woodBark3D)" stroke-width="5.2" stroke-linecap="round" />
+            <path class="behind-branch-stem" d="M 118,466 C 72,504 38,534 10,564" stroke="url(#woodBark3D)" stroke-width="5.2" stroke-linecap="round" />
+            <g transform="translate(448, 42) rotate(48)"><use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d1" /></g>
+            <g transform="translate(490, 12) rotate(66)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d3" /></g>
+            <g transform="translate(48, 526) rotate(-134)"><use href="#realistic-leaf-pod" class="behind-branch-leaf behind-leaf-d2" /></g>
+            <g transform="translate(10, 564) rotate(-152)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d4" /></g>
+          </svg>
+
+          <div class="frameless-photo-shell aspect-[4/5]">
+            <img src="https://images.unsplash.com/photo-1448375240586-882707db888b?auto=format&fit=crop&w=900&q=85"
+                 onerror="this.onerror=null;this.src='https://placehold.co/700x875/B8C4B6/2B1810?text=Botanical+Solitude';"
+                 alt="Sunlit tranquil forest trees and soft morning mist"
+                 class="frameless-photo-img" />
+          </div>
+          <div class="mt-5 px-2">
+            <span class="text-xs font-semibold uppercase tracking-[0.2em] text-wood-dark">06 / Eco-Psychology</span>
+            <h4 class="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">Botanical Canopy Calm</h4>
+            <p class="mt-1.5 text-sm text-wood-medium leading-relaxed">
+              Integrating nature-assisted mindfulness and biophilic architecture to restore cognitive ease.
+            </p>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 3: HOLISTIC PSYCHOLOGY & MINDFUL CARE BARS
+         - Upper template darker wood-green colors (#C7D2C4 / #B8C4B6 / warm wood tint)
+         - Pointing on ANY bar blurs all other bars & images to focus 100% on the pointed bar
+         - Realistic 3D branches sprout from behind the pointed bar
+         ======================================================================== -->
+    <section id="holistic-bars" class="max-w-6xl mx-auto px-4 sm:px-8 py-24">
+      <div class="text-center max-w-3xl mx-auto mb-16" data-parallax-up="0.08">
+        <span class="inline-block px-4 py-1.5 rounded-full wood-green-bar text-xs font-semibold uppercase tracking-[0.24em] text-wood-deepest">
+          Interactive Therapeutic Pathways
+        </span>
+        <h3 class="mt-4 font-serif text-4xl sm:text-5xl md:text-6xl font-semibold text-wood-deepest">
+          Tailored Care Bars at Ranniya’s
+        </h3>
+        <p class="mt-4 text-base sm:text-lg text-wood-medium">
+          Point or tap on each sanctuary care bar to focus exclusively on that modality and reveal our clinical approach.
+        </p>
+      </div>
+
+      <div class="space-y-7">
+
+        <!-- BAR 01: Somatics & Breathwork -->
+        <div class="focus-item therapy-bar-item wood-green-bar rounded-3xl p-6 sm:p-9" data-parallax-up="0.04">
+          <!-- Sprouting 3D Branches Behind Bar -->
+          <svg class="behind-branch-layer" viewBox="0 0 1000 220" fill="none" preserveAspectRatio="none">
+            <path class="behind-branch-stem" d="M 85,55 C 48,28 24,14 4,4" stroke="url(#woodBark3D)" stroke-width="4.5" stroke-linecap="round" />
+            <path class="behind-branch-stem" d="M 915,165 C 952,190 978,204 996,216" stroke="url(#woodBark3D)" stroke-width="4.5" stroke-linecap="round" />
+            <g transform="translate(28, 18) rotate(-48)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d1" /></g>
+            <g transform="translate(972, 200) rotate(132)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d2" /></g>
+          </svg>
+
+          <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div class="flex items-start sm:items-center gap-5">
+              <span class="font-serif text-3xl sm:text-4xl font-semibold px-4 py-2 rounded-2xl bg-sanctuary-beige/75 text-wood-deepest">
+                01
+              </span>
+              <div>
+                <h4 class="font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">
+                  Somatics &amp; Autonomic Breath Regulation
+                </h4>
+                <p class="mt-1 text-sm sm:text-base text-wood-dark max-w-2xl">
+                  Gentle body-oriented psychotherapy designed to release stored survival stress, quiet racing thoughts, and restore vagal tone without overwhelm.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 self-end md:self-center shrink-0">
+              <span class="px-4 py-2 rounded-full bg-sanctuary-beige/75 text-xs font-semibold uppercase tracking-widest text-wood-deepest">
+                60 Min Sanctuary
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BAR 02: Grounded Talk Therapy -->
+        <div class="focus-item therapy-bar-item wood-green-bar rounded-3xl p-6 sm:p-9" data-parallax-up="0.06">
+          <svg class="behind-branch-layer" viewBox="0 0 1000 220" fill="none" preserveAspectRatio="none">
+            <path class="behind-branch-stem" d="M 915,52 C 955,26 978,12 996,4" stroke="url(#woodBark3D)" stroke-width="4.5" stroke-linecap="round" />
+            <path class="behind-branch-stem" d="M 85,168 C 45,192 22,206 4,216" stroke="url(#woodBark3D)" stroke-width="4.5" stroke-linecap="round" />
+            <g transform="translate(972, 18) rotate(48)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d1" /></g>
+            <g transform="translate(28, 202) rotate(-132)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d2" /></g>
+          </svg>
+
+          <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div class="flex items-start sm:items-center gap-5">
+              <span class="font-serif text-3xl sm:text-4xl font-semibold px-4 py-2 rounded-2xl bg-sanctuary-beige/75 text-wood-deepest">
+                02
+              </span>
+              <div>
+                <h4 class="font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">
+                  Grounded Depth &amp; Relational Talk Therapy
+                </h4>
+                <p class="mt-1 text-sm sm:text-base text-wood-dark max-w-2xl">
+                  Compassionate, unhurried dialogue blending attachment repair, existential clarity, and cognitive ease in a warm timber-and-linen room.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 self-end md:self-center shrink-0">
+              <span class="px-4 py-2 rounded-full bg-sanctuary-beige/75 text-xs font-semibold uppercase tracking-widest text-wood-deepest">
+                75 Min Sanctuary
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BAR 03: Emotional Restoration & Burnout Recovery -->
+        <div class="focus-item therapy-bar-item wood-green-bar rounded-3xl p-6 sm:p-9" data-parallax-up="0.08">
+          <svg class="behind-branch-layer" viewBox="0 0 1000 220" fill="none" preserveAspectRatio="none">
+            <path class="behind-branch-stem" d="M 85,55 C 48,28 24,14 4,4" stroke="url(#woodBark3D)" stroke-width="4.5" stroke-linecap="round" />
+            <path class="behind-branch-stem" d="M 915,165 C 952,190 978,204 996,216" stroke="url(#woodBark3D)" stroke-width="4.5" stroke-linecap="round" />
+            <g transform="translate(28, 18) rotate(-48)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d1" /></g>
+            <g transform="translate(972, 200) rotate(132)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d2" /></g>
+          </svg>
+
+          <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div class="flex items-start sm:items-center gap-5">
+              <span class="font-serif text-3xl sm:text-4xl font-semibold px-4 py-2 rounded-2xl bg-sanctuary-beige/75 text-wood-deepest">
+                03
+              </span>
+              <div>
+                <h4 class="font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">
+                  Emotional Restoration &amp; Quiet Burnout Recovery
+                </h4>
+                <p class="mt-1 text-sm sm:text-base text-wood-dark max-w-2xl">
+                  For caregivers, creatives, and leaders carrying invisible exhaustion—restoring boundaries, deep rest, and inner gentleness.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 self-end md:self-center shrink-0">
+              <span class="px-4 py-2 rounded-full bg-sanctuary-beige/75 text-xs font-semibold uppercase tracking-widest text-wood-deepest">
+                90 Min Sanctuary
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- BAR 04: Botanical Silence & Sensory Integration -->
+        <div class="focus-item therapy-bar-item wood-green-bar rounded-3xl p-6 sm:p-9" data-parallax-up="0.10">
+          <svg class="behind-branch-layer" viewBox="0 0 1000 220" fill="none" preserveAspectRatio="none">
+            <path class="behind-branch-stem" d="M 915,52 C 955,26 978,12 996,4" stroke="url(#woodBark3D)" stroke-width="4.5" stroke-linecap="round" />
+            <path class="behind-branch-stem" d="M 85,168 C 45,192 22,206 4,216" stroke="url(#woodBark3D)" stroke-width="4.5" stroke-linecap="round" />
+            <g transform="translate(972, 18) rotate(48)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d1" /></g>
+            <g transform="translate(28, 202) rotate(-132)"><use href="#small-leaf-pod" class="behind-branch-leaf behind-leaf-d2" /></g>
+          </svg>
+
+          <div class="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            <div class="flex items-start sm:items-center gap-5">
+              <span class="font-serif text-3xl sm:text-4xl font-semibold px-4 py-2 rounded-2xl bg-sanctuary-beige/75 text-wood-deepest">
+                04
+              </span>
+              <div>
+                <h4 class="font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">
+                  Botanical Silence &amp; Mindful Sensory Care
+                </h4>
+                <p class="mt-1 text-sm sm:text-base text-wood-dark max-w-2xl">
+                  Low-stimulation restorative sessions combining cedarwood aromatherapy, acoustic stillness, and guided mindfulness in our courtyard atrium.
+                </p>
+              </div>
+            </div>
+            <div class="flex items-center gap-4 self-end md:self-center shrink-0">
+              <span class="px-4 py-2 rounded-full bg-sanctuary-beige/75 text-xs font-semibold uppercase tracking-widest text-wood-deepest">
+                60 Min Sanctuary
+              </span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 4: BOTANICAL CALM & INTERACTIVE BREATHING PACER + UPWARD PARALLAX
+         ======================================================================== -->
+    <section id="botanical-calm" class="max-w-7xl mx-auto px-4 sm:px-8 py-24">
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+
+        <!-- Interactive Mindful Breathing Sanctuary Box -->
+        <div class="lg:col-span-6" data-parallax-up="0.09">
+          <div class="focus-item wood-green-card rounded-3xl p-8 sm:p-12 flex flex-col items-center text-center">
+            <span class="text-xs font-semibold uppercase tracking-[0.24em] text-wood-dark">
+              Live Sanctuary Breath Pacer
+            </span>
+            <h3 class="mt-2 font-serif text-3xl sm:text-4xl font-semibold text-wood-deepest">
+              Pause Here for Three Gentle Breaths
+            </h3>
+            <p class="mt-2 text-sm sm:text-base text-wood-medium max-w-md">
+              Follow the expanding botanical timber ring below to synchronize your breathing with Ranniya’s calm rhythm.
+            </p>
+
+            <!-- 3D Breathing Ring -->
+            <div class="my-10 relative flex items-center justify-center w-48 h-48 sm:w-56 sm:h-56">
+              <div class="mindful-orb absolute inset-0 rounded-full bg-sanctuary-barGreen/80 border-2 border-wood-deepest/25"></div>
+              <div class="relative z-10 w-32 h-32 sm:w-36 sm:h-36 rounded-full bg-sanctuary-beige/90 flex flex-col items-center justify-center shadow-inner px-3">
+                <span id="breath-phase-label" class="font-serif text-2xl sm:text-3xl font-semibold text-wood-deepest">
+                  Inhale
+                </span>
+                <span class="text-[11px] uppercase tracking-widest text-wood-dark mt-1">
+                  Soft &amp; Slow
+                </span>
+              </div>
+            </div>
+
+            <p class="text-xs uppercase tracking-[0.22em] font-medium text-wood-dark">
+              4 Seconds Inhale • 4 Seconds Restorative Exhale
+            </p>
+          </div>
+        </div>
+
+        <!-- Right Upward-Moving Philosophy & Frameless Sensory Card -->
+        <div class="lg:col-span-6 space-y-8" data-parallax-up="0.14">
+          <div class="focus-item wood-green-bar rounded-3xl p-8 sm:p-10">
+            <span class="text-xs font-semibold uppercase tracking-[0.22em] text-wood-dark">
+              Why Minimalism Heals
+            </span>
+            <h4 class="mt-2 font-serif text-3xl sm:text-4xl font-semibold text-wood-deepest">
+              Designed Without Visual Noise or Clinical Coldness
+            </h4>
+            <p class="mt-3 text-sm sm:text-base text-wood-medium leading-relaxed">
+              Research in environmental psychology shows that natural wood grain, muted tranquil blues, and soft botanical greens measurably lower cortisol within minutes of arrival. At Ranniya’s, every surface, shadow, and sound is curated to let your nervous system exhale.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="focus-item wood-green-card rounded-3xl p-6">
+              <h5 class="font-serif text-2xl font-semibold text-wood-deepest">Acoustic Stillness</h5>
+              <p class="mt-2 text-sm text-wood-medium leading-relaxed">
+                Double-insulated cedar suites ensure complete privacy and gentle quietude throughout your therapy hour.
+              </p>
+            </div>
+            <div class="focus-item wood-green-card rounded-3xl p-6">
+              <h5 class="font-serif text-2xl font-semibold text-wood-deepest">Unrushed Transitions</h5>
+              <p class="mt-2 text-sm text-wood-medium leading-relaxed">
+                We schedule generous 25-minute buffers between guests so you never feel hurried leaving a session.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================================
+         SECTION 5: SANCTUARY VISIT & PRIVATE CONSULTATION REQUEST (NO WHITE TEXT)
+         ======================================================================== -->
+    <section id="sanctuary-connect" class="max-w-5xl mx-auto px-4 sm:px-8 pt-16 pb-24">
+      <div class="focus-item wood-green-bar rounded-3xl p-8 sm:p-12 md:p-16" data-parallax-up="0.06">
+        <div class="max-w-2xl">
+          <span class="inline-block px-4 py-1.5 rounded-full bg-sanctuary-beige/80 text-xs font-semibold uppercase tracking-[0.24em] text-wood-deepest">
+            Begin Your Quiet Journey
+          </span>
+          <h3 class="mt-4 font-serif text-4xl sm:text-5xl font-semibold text-wood-deepest">
+            Arrange a Private Welcome at Ranniya’s
+          </h3>
+          <p class="mt-3 text-sm sm:text-base text-wood-dark leading-relaxed">
+            Share a few gentle details below. Our sanctuary coordinator will reach out quietly to arrange your first in-person or private online session.
+          </p>
+        </div>
+
+        <form id="sanctuary-booking-form" class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <div>
+            <label for="guest-name" class="block text-xs font-semibold uppercase tracking-[0.2em] text-wood-deepest mb-2">
+              Your Preferred Name
+            </label>
+            <input id="guest-name" type="text" required placeholder="e.g., Elena Vance"
+                   class="w-full px-5 py-4 rounded-2xl bg-sanctuary-beige/90 border border-wood-deepest/20 text-wood-deepest placeholder-wood-medium/60 focus:outline-none focus:border-wood-deepest transition-colors" />
+          </div>
+
+          <div>
+            <label for="guest-contact" class="block text-xs font-semibold uppercase tracking-[0.2em] text-wood-deepest mb-2">
+              Quiet Email or Phone
+            </label>
+            <input id="guest-contact" type="text" required placeholder="elena@example.com"
+                   class="w-full px-5 py-4 rounded-2xl bg-sanctuary-beige/90 border border-wood-deepest/20 text-wood-deepest placeholder-wood-medium/60 focus:outline-none focus:border-wood-deepest transition-colors" />
+          </div>
+
+          <div>
+            <label for="guest-modality" class="block text-xs font-semibold uppercase tracking-[0.2em] text-wood-deepest mb-2">
+              Preferred Care Pathway
+            </label>
+            <select id="guest-modality"
+                    class="w-full px-5 py-4 rounded-2xl bg-sanctuary-beige/90 border border-wood-deepest/20 text-wood-deepest focus:outline-none focus:border-wood-deepest transition-colors">
+              <option value="Somatics & Breath Regulation">01 — Somatics &amp; Breath Regulation</option>
+              <option value="Grounded Depth Talk Therapy">02 — Grounded Depth Talk Therapy</option>
+              <option value="Emotional Restoration & Burnout Care">03 — Emotional Restoration &amp; Burnout Care</option>
+              <option value="Botanical Silence & Sensory Care">04 — Botanical Silence &amp; Sensory Care</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="guest-time" class="block text-xs font-semibold uppercase tracking-[0.2em] text-wood-deepest mb-2">
+              Preferred Time of Day
+            </label>
+            <select id="guest-time"
+                    class="w-full px-5 py-4 rounded-2xl bg-sanctuary-beige/90 border border-wood-deepest/20 text-wood-deepest focus:outline-none focus:border-wood-deepest transition-colors">
+              <option value="Morning Light (9:00 AM – 12:00 PM)">Morning Light (9:00 AM – 12:00 PM)</option>
+              <option value="Quiet Afternoon (1:00 PM – 4:00 PM)">Quiet Afternoon (1:00 PM – 4:00 PM)</option>
+              <option value="Evening Stillness (5:00 PM – 7:30 PM)">Evening Stillness (5:00 PM – 7:30 PM)</option>
+            </select>
+          </div>
+
+          <div class="sm:col-span-2">
+            <label for="guest-note" class="block text-xs font-semibold uppercase tracking-[0.2em] text-wood-deepest mb-2">
+              Optional Note (What would feel most supportive right now?)
+            </label>
+            <textarea id="guest-note" rows="3" placeholder="Share as little or as much as feels comfortable..."
+                      class="w-full px-5 py-4 rounded-2xl bg-sanctuary-beige/90 border border-wood-deepest/20 text-wood-deepest placeholder-wood-medium/60 focus:outline-none focus:border-wood-deepest transition-colors"></textarea>
+          </div>
+
+          <div class="sm:col-span-2 flex flex-wrap items-center justify-between gap-4 pt-2">
+            <p class="text-xs text-wood-dark">
+              100% private &amp; confidential. No automated clinical spam—only warm human care.
+            </p>
+            <button type="submit"
+                    class="px-9 py-4 rounded-2xl bg-wood-tint hover:bg-[#cbbba3] text-wood-deepest font-semibold text-sm uppercase tracking-[0.2em] shadow-md transition-transform duration-300 hover:scale-[1.02]">
+              Send Quiet Request
+            </button>
+          </div>
+        </form>
+
+        <!-- Custom Confirmation Message Box (Never uses alert()) -->
+        <div id="booking-confirmation-box" class="hidden mt-8 p-6 rounded-2xl bg-sanctuary-beige/95 border border-wood-deepest/25">
+          <h4 class="font-serif text-2xl font-semibold text-wood-deepest">
+            Your Sanctuary Request Has Been Received
+          </h4>
+          <p id="booking-confirmation-text" class="mt-2 text-sm text-wood-dark leading-relaxed"></p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER (DARKER WOOD-GREEN TEMPLATE WITH DARK WOOD BROWN TEXT)
+       ========================================================================== -->
+  <footer class="relative z-20 wood-green-header py-16 px-4 sm:px-8">
+    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+      <div>
+        <h2 class="font-serif text-3xl sm:text-4xl font-semibold text-wood-deepest">Ranniya’s</h2>
+        <p class="mt-1 text-xs uppercase tracking-[0.24em] text-wood-dark">
+          Psychology &amp; Human Therapy Sanctuary
+        </p>
+        <p class="mt-3 text-sm text-wood-medium max-w-md">
+          Crafted with natural wood warmth, tranquil stillness, and unhurried human care.
+        </p>
+      </div>
+
+      <div class="flex flex-wrap gap-6 text-sm font-medium text-wood-deepest">
+        <a href="#top-sanctuary" class="hover:underline">Sanctuary Top</a>
+        <a href="#therapy-gallery" class="hover:underline">Sensory Gallery</a>
+        <a href="#holistic-bars" class="hover:underline">Therapy Bars</a>
+        <a href="#botanical-calm" class="hover:underline">Breath Pacer</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       4. BOTTOM GROWING REALISTIC 3D BROWN WOOD BRANCHES WHEN SCROLLING DOWN
+       Progressively sprouts from the bottom corners/edges as the user scrolls down
+       ========================================================================== -->
+  <div id="bottom-branches-overlay" aria-hidden="true">
+    <svg class="w-full h-full overflow-visible" viewBox="0 0 1440 290" fill="none" preserveAspectRatio="none">
+      <!-- Left Bottom Growing 3D Brown Branch -->
+      <path id="scroll-branch-left-main" filter="url(#drop3D)"
+            d="M -10,295 C 55,245 110,195 185,155 C 245,122 295,95 355,58"
+            stroke="url(#woodBark3D)" stroke-width="7.5" stroke-linecap="round" />
+      <path id="scroll-branch-left-sub1" filter="url(#drop3D)"
+            d="M 118,200 C 138,145 168,108 210,74"
+            stroke="url(#twigBark3D)" stroke-width="4.5" stroke-linecap="round" />
+      <path id="scroll-branch-left-sub2" filter="url(#drop3D)"
+            d="M 225,135 C 268,148 312,145 352,130"
+            stroke="url(#twigBark3D)" stroke-width="3.8" stroke-linecap="round" />
+
+      <!-- Left Bottom Growing 3D Leaves -->
+      <g id="scroll-leaf-l1" class="bottom-grow-leaf" transform="translate(152, 168) rotate(-32) scale(0)">
+        <use href="#realistic-leaf-pod" />
+      </g>
+      <g id="scroll-leaf-l2" class="bottom-grow-leaf" transform="translate(210, 74) rotate(28) scale(0)">
+        <use href="#realistic-leaf-pod" />
+      </g>
+      <g id="scroll-leaf-l3" class="bottom-grow-leaf" transform="translate(290, 98) rotate(-25) scale(0)">
+        <use href="#small-leaf-pod" />
+      </g>
+      <g id="scroll-leaf-l4" class="bottom-grow-leaf" transform="translate(355, 58) rotate(48) scale(0)">
+        <use href="#realistic-leaf-pod" />
+      </g>
+      <g id="scroll-leaf-l5" class="bottom-grow-leaf" transform="translate(352, 130) rotate(75) scale(0)">
+        <use href="#small-leaf-pod" />
+      </g>
+
+      <!-- Right Bottom Growing 3D Brown Branch -->
+      <path id="scroll-branch-right-main" filter="url(#drop3D)"
+            d="M 1450,295 C 1385,242 1325,192 1252,150 C 1190,115 1138,88 1078,52"
+            stroke="url(#woodBark3D)" stroke-width="7.5" stroke-linecap="round" />
+      <path id="scroll-branch-right-sub1" filter="url(#drop3D)"
+            d="M 1318,196 C 1295,142 1265,104 1222,70"
+            stroke="url(#twigBark3D)" stroke-width="4.5" stroke-linecap="round" />
+      <path id="scroll-branch-right-sub2" filter="url(#drop3D)"
+            d="M 1208,128 C 1165,142 1122,140 1082,126"
+            stroke="url(#twigBark3D)" stroke-width="3.8" stroke-linecap="round" />
+
+      <!-- Right Bottom Growing 3D Leaves -->
+      <g id="scroll-leaf-r1" class="bottom-grow-leaf" transform="translate(1284, 165) rotate(32) scale(0)">
+        <use href="#realistic-leaf-pod" />
+      </g>
+      <g id="scroll-leaf-r2" class="bottom-grow-leaf" transform="translate(1222, 70) rotate(-28) scale(0)">
+        <use href="#realistic-leaf-pod" />
+      </g>
+      <g id="scroll-leaf-r3" class="bottom-grow-leaf" transform="translate(1142, 92) rotate(25) scale(0)">
+        <use href="#small-leaf-pod" />
+      </g>
+      <g id="scroll-leaf-r4" class="bottom-grow-leaf" transform="translate(1078, 52) rotate(-48) scale(0)">
+        <use href="#realistic-leaf-pod" />
+      </g>
+      <g id="scroll-leaf-r5" class="bottom-grow-leaf" transform="translate(1082, 126) rotate(-75) scale(0)">
+        <use href="#small-leaf-pod" />
+      </g>
+    </svg>
+  </div>
+
+  <!-- ==========================================================================
+       120HZ HIGH-PRECISION JAVASCRIPT ANIMATION ENGINE
+       ========================================================================== -->
+  <script>
+    window.onload = function () {
+      /* ------------------------------------------------------------------------
+         1. INTRO SPLASH SCREEN CONTROLLER
+         ------------------------------------------------------------------------ */
+      const splashScreen = document.getElementById('splash-screen');
+      const replayBtn = document.getElementById('replay-intro-btn');
+      const mobileReplayBtn = document.getElementById('mobile-replay-btn');
+      let splashDismissed = false;
+
+      function dismissSplash() {
+        if (splashDismissed) return;
+        splashDismissed = true;
+        splashScreen.classList.add('splash-exit');
+      }
+
+      function replaySplash() {
+        splashDismissed = false;
+        // Reset SVG animations cleanly by cloning the SVG node
+        const svgNode = splashScreen.querySelector('svg');
+        if (svgNode) {
+          const clone = svgNode.cloneNode(true);
+          svgNode.parentNode.replaceChild(clone, svgNode);
+        }
+        splashScreen.classList.remove('splash-exit');
+      }
+
+      splashScreen.addEventListener('click', dismissSplash);
+      splashScreen.addEventListener('touchstart', dismissSplash, { passive: true });
+      splashScreen.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          dismissSplash();
+        }
+      });
+
+      if (replayBtn) replayBtn.addEventListener('click', replaySplash);
+      if (mobileReplayBtn) mobileReplayBtn.addEventListener('click', replaySplash);
+
+      /* ------------------------------------------------------------------------
+         2. MOBILE MENU CONTROLLER
+         ------------------------------------------------------------------------ */
+      const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+      const mobileDrawer = document.getElementById('mobile-drawer');
+      const iconOpen = document.getElementById('menu-icon-open');
+      const iconClose = document.getElementById('menu-icon-close');
+      const mobileLinks = document.querySelectorAll('.mobile-nav-link');
+
+      if (mobileMenuBtn && mobileDrawer) {
+        mobileMenuBtn.addEventListener('click', function () {
+          const isHidden = mobileDrawer.classList.contains('hidden');
+          if (isHidden) {
+            mobileDrawer.classList.remove('hidden');
+            iconOpen.classList.add('hidden');
+            iconClose.classList.remove('hidden');
+            mobileMenuBtn.setAttribute('aria-expanded', 'true');
+          } else {
+            mobileDrawer.classList.add('hidden');
+            iconOpen.classList.remove('hidden');
+            iconClose.classList.add('hidden');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        mobileLinks.forEach(function (link) {
+          link.addEventListener('click', function () {
+            mobileDrawer.classList.add('hidden');
+            iconOpen.classList.remove('hidden');
+            iconClose.classList.add('hidden');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+          });
+        });
+      }
+
+      /* ------------------------------------------------------------------------
+         3. GLOBAL FOCUS-BLUR INTERACTION & 3D TILT SPRING BOUNCE ON IMAGES
+         When pointing on an image or bar, all other bars/images smoothly blur.
+         ------------------------------------------------------------------------ */
+      const focusItems = document.querySelectorAll('.focus-item');
+      const tiltCards = document.querySelectorAll('[data-tilt-card]');
+
+      focusItems.forEach(function (item) {
+        item.addEventListener('mouseenter', function () {
+          document.body.classList.add('focus-mode-active');
+          focusItems.forEach(function (other) {
+            other.classList.remove('is-focused');
+          });
+          item.classList.add('is-focused');
+        });
+
+        item.addEventListener('mouseleave', function () {
+          item.classList.remove('is-focused');
+          document.body.classList.remove('focus-mode-active');
+        });
+
+        // Mobile touch support: tapping an image/bar focuses it and grows its branches
+        item.addEventListener('touchstart', function (e) {
+          const alreadyFocused = item.classList.contains('is-focused');
+          focusItems.forEach(function (other) {
+            other.classList.remove('is-focused');
+          });
+          if (!alreadyFocused) {
+            document.body.classList.add('focus-mode-active');
+            item.classList.add('is-focused');
+          } else {
+            document.body.classList.remove('focus-mode-active');
+          }
+          e.stopPropagation();
+        }, { passive: true });
+      });
+
+      document.body.addEventListener('touchstart', function () {
+        document.body.classList.remove('focus-mode-active');
+        focusItems.forEach(function (item) {
+          item.classList.remove('is-focused');
+        });
+      }, { passive: true });
+
+      // 3D Perspective Tilt & Spring Bounce on Frameless Photos
+      tiltCards.forEach(function (card) {
+        const shell = card.querySelector('.frameless-photo-shell');
+        if (!shell) return;
+
+        card.addEventListener('mousemove', function (e) {
+          const rect = shell.getBoundingClientRect();
+          const relX = (e.clientX - rect.left) / rect.width - 0.5;
+          const relY = (e.clientY - rect.top) / rect.height - 0.5;
+          const rotateX = (-relY * 9).toFixed(2);
+          const rotateY = (relX * 9).toFixed(2);
+          shell.style.transform = `translateY(-10px) scale(1.028) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        card.addEventListener('mouseleave', function () {
+          shell.style.transform = 'translateY(0px) scale(1) rotateX(0deg) rotateY(0deg)';
+        });
+      });
+
+      /* ------------------------------------------------------------------------
+         4. CUSTOM 3D LEAF CURSOR + VERY MINIMAL BLURRED SMOKE SHADOW TRAIL
+         ------------------------------------------------------------------------ */
+      const leafCursor = document.getElementById('leaf-cursor');
+      const smokeCanvas = document.getElementById('smoke-trail-canvas');
+      const smokeCtx = smokeCanvas.getContext('2d');
+      const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+      let mouseX = window.innerWidth / 2;
+      let mouseY = window.innerHeight / 2;
+      let cursorX = mouseX;
+      let cursorY = mouseY;
+      let cursorAngle = 0;
+      let lastSmokeSpawn = 0;
+      const smokeParticles = [];
+      const MAX_SMOKE_PARTICLES = 11; // Strictly minimal & subtle
+
+      /* ------------------------------------------------------------------------
+         5. VERY MINIMAL FALLING LEAVES CANVAS (ONLY 3 REALISTIC LEAVES)
+         ------------------------------------------------------------------------ */
+      const leavesCanvas = document.getElementById('falling-leaves-canvas');
+      const leavesCtx = leavesCanvas.getContext('2d');
+
+      function resizeCanvases() {
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        smokeCanvas.width = window.innerWidth * dpr;
+        smokeCanvas.height = window.innerHeight * dpr;
+        smokeCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        leavesCanvas.width = window.innerWidth * dpr;
+        leavesCanvas.height = window.innerHeight * dpr;
+        leavesCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      resizeCanvases();
+      window.addEventListener('resize', resizeCanvases);
+
+      if (isFinePointer) {
+        window.addEventListener('mousemove', function (e) {
+          const dx = e.clientX - mouseX;
+          const dy = e.clientY - mouseY;
+          const speed = Math.hypot(dx, dy);
+
+          mouseX = e.clientX;
+          mouseY = e.clientY;
+
+          // Spawn a very subtle, heavily blurred smoke shadow puff only occasionally
+          const now = performance.now();
+          if (speed > 2.5 && now - lastSmokeSpawn > 55 && smokeParticles.length < MAX_SMOKE_PARTICLES) {
+            lastSmokeSpawn = now;
+            smokeParticles.push({
+              x: mouseX + 8,
+              y: mouseY + 12,
+              vx: (Math.random() - 0.5) * 0.35 - dx * 0.02,
+              vy: -0.25 - Math.random() * 0.3,
+              radius: 16 + Math.random() * 10,
+              alpha: 0.075, // Very low opacity, soft blurred shadow mist
+              life: 0,
+              maxLife: 48 + Math.random() * 20
+            });
+          }
+        }, { passive: true });
+      }
+
+      // Create strictly 3 minimal realistic falling botanical leaves across the viewport
+      const fallingLeaves = [
+        { x: window.innerWidth * 0.14, y: 120, size: 15, angle: 0.4, spin: 0.008, swaySeed: 1.1, speedY: 0.32, hue: '#7E9978' },
+        { x: window.innerWidth * 0.56, y: 420, size: 13, angle: -0.6, spin: -0.007, swaySeed: 2.7, speedY: 0.28, hue: '#6E8B67' },
+        { x: window.innerWidth * 0.86, y: 260, size: 16, angle: 0.9, spin: 0.006, swaySeed: 4.3, speedY: 0.35, hue: '#8AA384' }
+      ];
+
+      function drawRealisticCanvasLeaf(ctx, leaf) {
+        ctx.save();
+        ctx.translate(leaf.x, leaf.y);
+        ctx.rotate(leaf.angle);
+        const s = leaf.size;
+
+        // Soft 3D drop shadow
+        ctx.shadowColor = 'rgba(43, 24, 16, 0.16)';
+        ctx.shadowBlur = 8;
+        ctx.shadowOffsetY = 4;
+
+        // Leaf blade
+        ctx.beginPath();
+        ctx.moveTo(0, s);
+        ctx.bezierCurveTo(-s * 0.65, s * 0.3, -s * 0.7, -s * 0.5, 0, -s);
+        ctx.bezierCurveTo(s * 0.7, -s * 0.5, s * 0.65, s * 0.3, 0, s);
+        ctx.closePath();
+        ctx.fillStyle = leaf.hue;
+        ctx.fill();
+
+        // Central wood stem vein
+        ctx.shadowColor = 'transparent';
+        ctx.beginPath();
+        ctx.moveTo(0, s + 3);
+        ctx.lineTo(0, -s * 0.75);
+        ctx.strokeStyle = 'rgba(59, 35, 20, 0.55)';
+        ctx.lineWidth = 1.1;
+        ctx.stroke();
+
+        ctx.restore();
+      }
+
+      /* ------------------------------------------------------------------------
+         6. SCROLL-DRIVEN BOTTOM GROWING BRANCHES & UPWARD PARALLAX ELEMENTS
+         ------------------------------------------------------------------------ */
+      const parallaxUpNodes = document.querySelectorAll('[data-parallax-up]');
+      const bottomBranchPaths = [
+        document.getElementById('scroll-branch-left-main'),
+        document.getElementById('scroll-branch-left-sub1'),
+        document.getElementById('scroll-branch-left-sub2'),
+        document.getElementById('scroll-branch-right-main'),
+        document.getElementById('scroll-branch-right-sub1'),
+        document.getElementById('scroll-branch-right-sub2')
+      ];
+
+      const bottomLeafNodes = [
+        { el: document.getElementById('scroll-leaf-l1'), x: 152, y: 168, rot: -32, threshold: 0.15 },
+        { el: document.getElementById('scroll-leaf-l2'), x: 210, y: 74, rot: 28, threshold: 0.32 },
+        { el: document.getElementById('scroll-leaf-l3'), x: 290, y: 98, rot: -25, threshold: 0.48 },
+        { el: document.getElementById('scroll-leaf-l4'), x: 355, y: 58, rot: 48, threshold: 0.65 },
+        { el: document.getElementById('scroll-leaf-l5'), x: 352, y: 130, rot: 75, threshold: 0.55 },
+        { el: document.getElementById('scroll-leaf-r1'), x: 1284, y: 165, rot: 32, threshold: 0.15 },
+        { el: document.getElementById('scroll-leaf-r2'), x: 1222, y: 70, rot: -28, threshold: 0.32 },
+        { el: document.getElementById('scroll-leaf-r3'), x: 1142, y: 92, rot: 25, threshold: 0.48 },
+        { el: document.getElementById('scroll-leaf-r4'), x: 1078, y: 52, rot: -48, threshold: 0.65 },
+        { el: document.getElementById('scroll-leaf-r5'), x: 1082, y: 126, rot: -75, threshold: 0.55 }
+      ];
+
+      // Initialize dasharray lengths for bottom branches
+      const branchLengths = bottomBranchPaths.map(function (path) {
+        if (!path) return 0;
+        const len = path.getTotalLength ? path.getTotalLength() : 420;
+        path.style.strokeDasharray = len;
+        path.style.strokeDashoffset = len;
+        return len;
+      });
+
+      let currentScrollY = window.scrollY;
+      let smoothScrollY = currentScrollY;
+      let scrollDelta = 0;
+
+      window.addEventListener('scroll', function () {
+        currentScrollY = window.scrollY;
+      }, { passive: true });
+
+      /* ------------------------------------------------------------------------
+         7. LIVE BREATHING PACER TEXT SYNCHRONIZATION
+         ------------------------------------------------------------------------ */
+      const breathLabel = document.getElementById('breath-phase-label');
+      setInterval(function () {
+        if (!breathLabel) return;
+        breathLabel.textContent = breathLabel.textContent.trim() === 'Inhale' ? 'Exhale' : 'Inhale';
+      }, 4000);
+
+      /* ------------------------------------------------------------------------
+         8. SANCTUARY FORM SUBMISSION HANDLER (NO ALERT())
+         ------------------------------------------------------------------------ */
+      const bookingForm = document.getElementById('sanctuary-booking-form');
+      const confirmBox = document.getElementById('booking-confirmation-box');
+      const confirmText = document.getElementById('booking-confirmation-text');
+
+      if (bookingForm) {
+        bookingForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+          const guestName = document.getElementById('guest-name').value || 'Dear Guest';
+          const modality = document.getElementById('guest-modality').value;
+          const timeSlot = document.getElementById('guest-time').value;
+
+          confirmText.textContent = `Thank you, ${guestName}. We have noted your preference for "${modality}" during "${timeSlot}". Our sanctuary care coordinator will reach out quietly within 24 hours.`;
+          confirmBox.classList.remove('hidden');
+          bookingForm.reset();
+        });
+      }
+
+      /* ------------------------------------------------------------------------
+         9. UNIFIED 120HZ REQUESTANIMATIONFRAME LOOP
+         ------------------------------------------------------------------------ */
+      let timeTick = 0;
+
+      function animateSanctuaryLoop() {
+        timeTick += 0.016;
+
+        // Smooth scroll interpolation for 120Hz fluidity
+        const prevSmoothScroll = smoothScrollY;
+        smoothScrollY += (currentScrollY - smoothScrollY) * 0.14;
+        scrollDelta = smoothScrollY - prevSmoothScroll;
+
+        // A. Update Custom 3D Leaf Pointer & Minimal Blurred Smoke Trail
+        if (isFinePointer) {
+          const vx = mouseX - cursorX;
+          const vy = mouseY - cursorY;
+          cursorX += vx * 0.28;
+          cursorY += vy * 0.28;
+
+          const targetAngle = Math.max(-28, Math.min(28, vx * 0.85));
+          cursorAngle += (targetAngle - cursorAngle) * 0.18;
+
+          leafCursor.style.transform = `translate3d(${cursorX.toFixed(1)}px, ${cursorY.toFixed(1)}px, 0) rotate(${cursorAngle.toFixed(1)}deg)`;
+
+          // Render Very Minimal Blurred Smoke Shadow Particles
+          smokeCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+          for (let i = smokeParticles.length - 1; i >= 0; i--) {
+            const p = smokeParticles[i];
+            p.life++;
+            p.x += p.vx;
+            p.y += p.vy;
+            p.radius += 0.38;
+
+            const progress = p.life / p.maxLife;
+            const currentAlpha = p.alpha * (1 - progress);
+
+            if (p.life >= p.maxLife || currentAlpha <= 0.002) {
+              smokeParticles.splice(i, 1);
+              continue;
+            }
+
+            const grad = smokeCtx.createRadialGradient(p.x, p.y, 1, p.x, p.y, p.radius);
+            grad.addColorStop(0, `rgba(74, 46, 27, ${currentAlpha.toFixed(3)})`);
+            grad.addColorStop(0.55, `rgba(110, 139, 103, ${(currentAlpha * 0.5).toFixed(3)})`);
+            grad.addColorStop(1, 'rgba(74, 46, 27, 0)');
+
+            smokeCtx.fillStyle = grad;
+            smokeCtx.beginPath();
+            smokeCtx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            smokeCtx.fill();
+          }
+        }
+
+        // B. Render Very Minimal Falling Leaves (Drifting Downward + Scroll Momentum)
+        leavesCtx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+        for (let i = 0; i < fallingLeaves.length; i++) {
+          const leaf = fallingLeaves[i];
+          // Moves gently down continuously and accelerates slightly when scrolling down
+          leaf.y += leaf.speedY + Math.max(0, scrollDelta * 0.18);
+          leaf.x += Math.sin(timeTick * 1.1 + leaf.swaySeed) * 0.35;
+          leaf.angle += leaf.spin + Math.cos(timeTick + leaf.swaySeed) * 0.003;
+
+          if (leaf.y > window.innerHeight + 40) {
+            leaf.y = -35;
+            leaf.x = (window.innerWidth * ((i + 0.5) / fallingLeaves.length)) + (Math.random() - 0.5) * 120;
+          }
+          drawRealisticCanvasLeaf(leavesCtx, leaf);
+        }
+
+        // C. Upward Moving Elements While Scrolling Down
+        const viewportCenter = smoothScrollY + window.innerHeight * 0.5;
+        for (let i = 0; i < parallaxUpNodes.length; i++) {
+          const node = parallaxUpNodes[i];
+          const speed = parseFloat(node.getAttribute('data-parallax-up')) || 0.08;
+          const offsetUp = -smoothScrollY * speed;
+          node.style.transform = `translate3d(0, ${offsetUp.toFixed(1)}px, 0)`;
+        }
+
+        // D. Bottom Growing Realistic 3D Wood Branches as User Scrolls Down
+        const maxScroll = Math.max(1, document.documentElement.scrollHeight - window.innerHeight);
+        const scrollRatio = Math.min(1, Math.max(0.04, smoothScrollY / maxScroll));
+
+        for (let i = 0; i < bottomBranchPaths.length; i++) {
+          const path = bottomBranchPaths[i];
+          if (!path) continue;
+          const totalLen = branchLengths[i];
+          // Main stems grow first, sub-twigs follow smoothly
+          const delayFactor = (i % 3 === 0) ? 1 : 0.85;
+          const drawFraction = Math.min(1, scrollRatio * 1.35 * delayFactor);
+          path.style.strokeDashoffset = (totalLen * (1 - drawFraction)).toFixed(1);
+        }
+
+        for (let i = 0; i < bottomLeafNodes.length; i++) {
+          const item = bottomLeafNodes[i];
+          if (!item.el) continue;
+          const leafProgress = Math.max(0, Math.min(1, (scrollRatio - item.threshold) / 0.35));
+          const swayDeg = Math.sin(timeTick * 1.6 + i) * 4 * leafProgress;
+          const scaleVal = (leafProgress * 0.92).toFixed(3);
+          item.el.setAttribute(
+            'transform',
+            `translate(${item.x}, ${item.y}) rotate(${(item.rot + swayDeg).toFixed(1)}) scale(${scaleVal})`
+          );
+        }
+
+        requestAnimationFrame(animateSanctuaryLoop);
+      }
+
+      animateSanctuaryLoop();
+    };
+  </script>
+</body>
+</html>
